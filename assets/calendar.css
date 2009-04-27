@@ -1,0 +1,99 @@
+#calendar_wrap{
+margin: 0;
+padding: 0;
+}
+
+
+#wp-calendar {
+	empty-cells: hide;
+	font-size: 11px;
+	margin: 0;
+	width: 100%;
+	text-align: center;
+}
+
+#wp-calendar thead{
+	color: #8DB8DB;
+	font-size: 10px;
+}
+
+
+#wp-calendar #next a {
+	padding-right: 10px;
+	text-align: right;
+
+}
+
+
+
+
+#wp-calendar #prev a {
+	padding-left: 10px;
+	text-align: left;
+
+}
+
+
+
+
+
+#wp-calendar a {
+	display: block;
+	text-decoration: none;
+	color: #FBB48A; 
+	font-weight: bolder;
+}
+
+
+
+
+#wp-calendar a:hover {
+	color: White;
+}
+
+
+
+
+#wp-calendar caption {
+	color: #444;
+	font-size: 18px;
+	font-weight: normal;
+	text-align: left;
+	padding-left: 15px;
+}
+
+
+
+
+#wp-calendar td {
+	color: #444;
+	font-weight: normal;
+	font-size: 11px;
+	letter-spacing: normal;
+	padding: 2px 0;
+	text-align: center;
+	background: White;
+}
+
+
+
+
+#wp-calendar td.pad:hover {
+	background: #fff;
+}
+
+
+
+
+#wp-calendar td:hover, #wp-calendar #today {
+	background: #8DB8DB;
+	color: White;
+}
+
+
+
+
+#wp-calendar th {
+	font-style: normal;
+	text-transform: capitalize;
+}

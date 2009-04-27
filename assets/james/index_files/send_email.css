@@ -1,0 +1,67 @@
+/*       Source:  Global Cache                                                                */
+/*     Location:  css/send_email.css r81914                                                   */
+/*      Machine:  10.1.0.52                                                                   */
+/*    Generated:  February 15th 2008 9:04:41 PM PST                                           */
+
+.confirm_email .confirmation_header{padding:20px;}
+.confirm_email .confirmation_header h2{padding-bottom:5px;}
+.email{width:500px;margin:auto;padding:10px;border:solid 1px #cccccc;background:white;font-family:monospace;}
+.confirm_email .send_buttons{width:500px;margin:auto;padding-top:10px;}
+.req_preview{background:white;}
+.confirm_req .req_preview{border:1px solid #cccccc;}
+.req_preview .confirm{border:0;}
+.preview_background{padding:20px;background:#f7f7f7;border-top:1px solid #cccccc;}
+.confirm_req .recipients,
+.req_preview,
+.confirm_req .send_buttons{width:434px;padding:5px;}
+.confirm_req .recipients,
+.confirm_req .req_preview,
+.confirm_req .send_buttons{margin:auto;}
+.req_preview .inputbutton{color:#666666;background-color:white;border-bottom:1px solid #999999;border-right:1px solid #999999;}
+.confirm_req .send_buttons{padding-top:10px;}
+.confirm_req .recipients{background:white;border:1px solid #cccccc;border-bottom:0px;}
+.req_confirmation{border:1px solid #555;border-top:none;background:#eee;}
+h2.req_conf_header{padding:5px;}
+.req_confirmation h3{font-size:11px;}
+.req_confirmation .req_recipients{padding:9px 15px 0px 16px;margin:0;background:#fff;}
+.req_confirmation .req_recipients h3{padding-left:52px;background:#fff;}
+.req_confirmation .req_recipients strong{float:left;padding:4px 0;margin-left:-52px;}
+.req_confirmation .req_recipients .token, .int_dialog_body .token{font-weight:normal;float:left;display:block;background-image:url('/inbox/images/token.gif');background-repeat:no-repeat;color:black;margin:2px;white-space:nowrap;}
+.req_confirmation .req_recipients .token span, 
+.int_dialog_body .token span{background-image:url('/inbox/images/token.gif');background-position:top right;background-repeat:no-repeat;display:block;}
+.req_confirmation .req_recipients .token span span, 
+.int_dialog_body .token span span{background-position:bottom right;}
+.req_confirmation .req_recipients .token span span span, 
+.int_dialog_body .token span span span{background-position:bottom left;}
+.req_confirmation .req_recipients .token span span span span,
+.int_dialog_body .token span span span span{background-image:none;padding:2px 3px 3px 5px;}
+.req_confirmation .req_recipients .token:hover,
+.req_confirmation .req_recipients .token:hover span,
+.int_dialog_body .token:hover span,
+.int_dialog_body .token:hover span{background-image:url('/inbox/images/token_hover.gif');text-decoration:none;}
+.req_confirmation .req_recipients .simple{padding:2px 2px 3px 2px;white-space:wrap;}
+.req_confirmation .req_recipients .simple:hover{background:none;}
+.req_confirmation .req_recipients a.hide,
+.int_dialog_body a.hide{background-repeat:no-repeat;background-image:url('/inbox/images/token_x.gif');background-position:3px 2px;padding:0px 8px 0px 3px;text-decoration:none;}
+.req_confirmation .req_recipients a.hide:hover,
+.int_dialog_body a.hide:hover{text-decoration:none;}
+.req_confirmation .req_preview{margin:12px 7px 0 0;position:relative;min-height:177px;width:100%;background:url(/images/multi_friend_selector_preview_bg.gif) no-repeat 16px -17px;}
+.req_confirmation .req_preview_guts{position:relative;top:-18px;left:94px;width:404px;padding:8px 8px 4px 8px;border:1px solid #3b5998;background:#fff;}
+.req_confirmation .req_preview_guts h4{font-size:13px;padding:0 2px 4px 22px;background-repeat:no-repeat;background-position:top left;border-bottom:1px solid #ccc;}
+.req_confirmation .req_preview h3{border:none;padding-left:11px;}
+.req_confirmation .req_preview h3 span{display:block;float:left;padding:2px;}
+.req_confirmation .req_send_buttons{text-align:right;float:right;padding:0 18px 9px 10px;}
+.req_confirmation .req_send_buttons input{padding:3px 10px;margin-right:5px;}
+.send_buttons input{margin-right:5px;}
+.req_confirmation .req_send_buttons .inputbutton{background-color:#efefef;border-right:1px solid #5d5d5d;border-bottom:1px solid #5f5f5f;color:#000;} 
+.pop_dialog_table .send_buttons{float:right;}
+.req_confirmation .info .link_placeholder{color:#3b5998;}
+.req_confirmation #req_msg_add{margin:0;padding:2px 15px 8px 16px;border-bottom:1px solid #ccc;background:#fff;}
+.req_confirmation #req_msg_add span{color:#333;display:block;float:left;padding:3px 0 4px 0;margin:0 5px 0 0;}
+.req_confirmation #req_msg_add #personal_msg_add{display:block;float:left;padding:1px 1px 1px 56px;}
+.req_confirmation #req_msg_add #personal_msg_box span{font-weight:bold;}
+.req_confirmation #req_msg_add #personal_msg_box span a{font-weight:normal;}
+.req_confirmation #req_msg_add #personal_msg_add a,
+.req_confirmation #req_msg_add #personal_msg_box a{font-size:9px;}
+.req_confirmation #req_msg_add #personal_msg_box a{display:block;float:left;padding-top:3px;}
+.generic_dialog .generic_dialog_popup #pop_dialog_table{width:560px;}

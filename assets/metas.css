@@ -1,0 +1,67 @@
+
+.themeta{
+	background: url(img/themetaside.gif) repeat-y top left;
+	width: 25%;
+	float: right;
+	color: #848484;
+	margin-top: 6px;
+	padding-left: 25px;
+	line-height: 20px;
+}
+
+
+.themeta li, ul.post-meta li {
+	display: inline;
+}
+
+.themeta ul {
+	display: inline;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.themeta span.where{
+	color: #AFAFAF;
+	background: url(img/where.gif) no-repeat;
+	padding-left: 20px;
+}
+.themeta span.who{
+	color: #AFAFAF;
+	background: url(img/who.gif) no-repeat;
+	padding-left: 20px;
+}
+.themeta span.when-date{
+	color: #AFAFAF;
+	background: url(img/when-date.gif) no-repeat;
+	padding-left: 20px;
+}
+.themeta span.when-hour{
+	color: #AFAFAF;
+	background: url(img/when-hour.gif) no-repeat;
+	padding-left: 20px;
+}
+.themeta span.com{
+	color: #AFAFAF;
+	background: url(img/com.gif) no-repeat;
+	padding-left: 20px;
+}
+.themeta span.related{
+	color: #AFAFAF;
+	background: url(img/related.gif) no-repeat;
+	padding-left: 20px;
+}
+.themeta span.su{
+	color: #AFAFAF;
+	background: url(img/su.gif) no-repeat;
+	padding-left: 20px;
+}
+
+.themeta a {
+	color: #83B5DA;
+	font-weight: normal;
+	letter-spacing: 0;
+	text-decoration: none;
+}
+.themeta a:hover{
+	color: #74C0FA;
+}

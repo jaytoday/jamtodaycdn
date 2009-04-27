@@ -1,0 +1,88 @@
+
+#rap{
+	 margin: 0 0 0 0;
+	 padding: 0 0 0 0;
+ background: #6E8EAE;/* url(img/bgfoot.jpg);*/
+	background-position: bottom right;
+	background-repeat: no-repeat;
+	width: 100%;
+    min-height: 100%;
+    height: 100%;
+    voice-family: "\"}\"";
+    voice-family: inherit;
+    height: auto;
+	 text-align: center;
+}
+
+html>body #rap {
+    height: auto;
+	 width: 100%;
+}
+
+#main {
+margin: 0 0 0 20px;
+padding: 0 0 0 0;
+
+}
+
+#menu {
+	float: right;
+	width: 22%;
+  height: auto;
+  margin: 0 0 0 0px;
+}
+#nav {
+	padding-left: 0px;
+	padding-right: 0px;
+	float: left;
+	width: 100%;
+	text-align: left;
+}
+#content {
+	float: left;
+	width: 90%;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+#footer {
+	background: url(img/fbbody-r.gif) no-repeat bottom right;
+	width: 60%;
+	color: #414141;
+	margin: 0 0 5px 15px;
+	text-transform: capitalize;
+	clear: both;
+	padding: 0 0 0 0;
+
+}
+* html #footer{
+	margin: 0 0 135px 5px;
+	float: left;
+}
+#header{
+	height: 200px;
+	margin: 0;
+}
+
+#masthead{
+	background: url(img/bg.jpg);
+	background-position: top left;
+	background-repeat: repeat-x;
+	background-color: #6E8EAE;
+	/* 250px */
+	margin: 0;
+	height:50px;
+	padding: 0;
+}
+
+
+
+
+.reset{
+	clear: both;
+	height: 1px;
+}
+.reset2{
+	clear: both;
+	height: 20px;
+}

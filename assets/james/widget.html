@@ -1,0 +1,600 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml"><head profile="http://gmpg.org/xfn/11">
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>☕MORGLOG  </title>
+
+<link rel="stylesheet" href="http://pqstage.appspot.com/css/quiz" type="text/css" media="screen">
+<link rel="stylesheet" href="MORGLOG_files/style.css" type="text/css" media="screen">
+<link rel="alternate" type="application/rss+xml" title="☕MORGLOG RSS Feed" href="http://morglog.alleycatracing.com/wordpress/?feed=rss2">
+<link rel="pingback" href="http://morglog.alleycatracing.com/wordpress/xmlrpc.php">
+
+<style type="text/css" media="screen">
+
+	#page { background: url("http://morglog.alleycatracing.com/wordpress/wp-content/themes/default/images/kubrickbgwide.jpg") repeat-y top; border: none; }
+
+</style>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://morglog.alleycatracing.com/wordpress/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://morglog.alleycatracing.com/wordpress/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 2.5.1">
+
+	<link type="text/css" href="MORGLOG_files/SyntaxHighlighter.css">
+</head><body>
+<div id="page">
+
+
+<div id="header">
+	<div id="headerimg">
+		<h1><a href="http://morglog.alleycatracing.com/wordpress/">☕MORGLOG</a></h1>
+		<div class="description">My misguided guidance</div>
+	</div>
+</div>
+<hr>
+
+	<div id="content" class="narrowcolumn">
+
+	
+		
+			<div class="post" id="post-55">
+				<h2><a href="http://morglog.alleycatracing.com/wordpress/?p=55" rel="bookmark" title="Permanent Link to New Cometd client and server demo">New Cometd client and server demo</a></h2>
+				<small>November 7th, 2008 <!-- by Morgan --></small>
+
+				<div class="entry">
+				 <!-- start good stuff --> 
+ <li class="widget widget_plopquiz" id="pqwidget">
+	 <h2 class="widgettitle">Plopquiz</h2>
+	 <script src="http://pqstage.appspot.com/js/quiz/Misconceptions" type="text/javascript" rel="javascript"></script>
+ </li>
+ 
+					<p>On
+and off for the last couple weeks I have really been pushing myself to
+learn Java better. I constantly find myself unable to do things I want
+to with the languages I usually use (PHP specifically). As I am getting
+better I am coming to like it a lot more. As any reader of my blog (do
+I actually have ‘readers’?) know, I am really into Cometd, which the
+most major implementation of is written in Java. So in order to utilize
+Cometd Java and push my jQuery plugin further along, I figured it was
+high time I learn Java. I am really glad I am too. Just in time for my
+new Android phone too <img src="MORGLOG_files/icon_smile.gif" alt=":)" class="wp-smiley"> </p>
+<p><strong>CometdMap</strong><br>
+Almost every demo of Cometd out there is a chat application, next up is
+stock tickers. There are one or two more I can think of off hand, none
+of which could be made into something more useful. I have had an
+application idea in the back of my head for quick some time. I really
+like doing work with maps, have been doing professional Google Maps
+work for a couple years, had to get the (second) dorkiest bike computer
+with GPS to map my rides. I have wanted for some time to do a real-time
+map. CometdMap is a proof of concept of that. It has no actually data
+input at the moment, infact, it is really basic right now. What it
+really does is show how simply you can build a Cometd Java app. I was
+really surprised at how easily I built this with my limited knowledge
+of Java.</p>
+<p><strong>What does it do</strong><br>
+Right now, if you build and run the application you will get a simple
+Google Map. Clicking on the map will place a marker. Wowee! Pretty
+basic yeah, but what is going on here. Clicking the map publishes the
+point to the server, it is not until the server returns the data to the
+subscription callback that it is added. That is about all for the
+client side. On the server side two things are going on. First, when a
+new client joins they are added to a list, very similar to the way the
+Cometd Chat demo handles clients for private messages. Second, when
+points are published they are tracked on another list. So what can we
+do with these lists? Add a couple points and reload your browser. Since
+you are now a new client and there are points on the list, the old
+points are sent back to you. This will work for any new clients joining
+also. With multiple clients connected markers are updated to each in
+real-time.</p>
+<p><strong>Download &amp; Build</strong><br>
+<a href="http://morglog.alleycatracing.com/misc/CometdMap.tar.gz">Download</a><br>
+As I have mentioned before, the Java build environment and I do not
+exactly get along. In the tarball there is a script call build
+(partially ripped from the Harmony build script). If you have built the
+Cometd demo from Jetty with Maven this script <em>should</em>
+work just fine. Otherwise change the paths in the build (and server)
+scripts to point to the directories where your Jetty and Comet
+components are.</p>
+<p>Enjoy, hopefully everyone is able to build with few problems. Check
+back in a couple weeks to see what I have in store next. Cheers, Morgan.</p>
+				</div>
+
+				<p class="postmetadata"> Posted in <a href="http://morglog.alleycatracing.com/wordpress/?cat=14" title="View all posts in AJAX" rel="category">AJAX</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=13" title="View all posts in Bayeux" rel="category">Bayeux</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=12" title="View all posts in Comet" rel="category">Comet</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=6" title="View all posts in JSON" rel="category">JSON</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=41" title="View all posts in Java" rel="category">Java</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=4" title="View all posts in JavaScript" rel="category">JavaScript</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=11" title="View all posts in jQuery" rel="category">jQuery</a> |   <a href="http://morglog.alleycatracing.com/wordpress/?p=55#comments" title="Comment on New Cometd client and server demo">5 Comments »</a></p>
+			</div>
+
+		
+			<div class="post" id="post-52">
+				<h2><a href="http://morglog.alleycatracing.com/wordpress/?p=52" rel="bookmark" title="Permanent Link to Progressive Enhacement">Progressive Enhacement</a></h2>
+				<small>October 15th, 2008 <!-- by Morgan --></small>
+
+				<div class="entry">
+					<p>Just read <a href="http://www.learningjquery.com/2008/10/1-awesome-way-to-avoid-the-not-so-excellent-flash-of-amazing-unstyled-content">this</a>
+blog post over at Learning jQuery. It is a tip on how to avoid ’style
+flashing’ on large and complex pages. Read it. Read it to get the
+explanation as to why just CSS cannot solve this problem. If you have
+been unfortunate enough to work with me, especially in a JS/design roll
+you will have heard me bitching about CSS in jQuery. I do not like when
+this is done. CSS is way better at CSS then jQuery. The benefits of
+apply the style is this global manner are huge.</p>
+<ul>
+<li>Speed of CSS</li>
+<li>&lt;linked&gt; files get cached</li>
+<li>Your Javacript will be simpler, smaller, faster</li>
+<li>If you are working with a team a designer can work on it without causing conflicts</li>
+</ul>
+<p>And this does not just apply to jQuery either, any framework or
+script can (and should) utilize this technique. Keep in mind this is
+not a cure all for progressive enhancement. You still cannot go all
+willy nilly AJAX without an already working base system. Thanks for the
+great tip.</p>
+				</div>
+
+				<p class="postmetadata"> Posted in <a href="http://morglog.alleycatracing.com/wordpress/?cat=24" title="View all posts in CSS" rel="category">CSS</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=35" title="View all posts in Developent" rel="category">Developent</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=23" title="View all posts in HTML" rel="category">HTML</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=4" title="View all posts in JavaScript" rel="category">JavaScript</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=11" title="View all posts in jQuery" rel="category">jQuery</a> |   <a href="http://morglog.alleycatracing.com/wordpress/?p=52#respond" title="Comment on Progressive Enhacement">No Comments »</a></p>
+			</div>
+
+		
+			<div class="post" id="post-49">
+				<h2><a href="http://morglog.alleycatracing.com/wordpress/?p=49" rel="bookmark" title="Permanent Link to more histarray">more histarray</a></h2>
+				<small>September 19th, 2008 <!-- by Morgan --></small>
+
+				<div class="entry">
+					<p>I am not sure if it is even useful for anything. But I am having fun dorking on it.<br>
+New Features.<br>
+added pop() method<br>
+added splice() method<br>
+unified adding and removing for more accurate revision and length</p>
+<p>New Home<br>
+I have been using <a href="http://github.com/">hithub</a> for a little now, and have put this up as my first <a href="http://github.com/morganrallen/histarray/tree">public repo</a>.</p>
+<p>*Notes<br>
+There is one big, probably unresolvable issue. You have to push in new elements.</p>
+<div class="dp-highlighter"><div class="bar"><div style="width: 472px;" class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;">view plain</a><a href="#" onclick="dp.sh.Toolbar.Command('CopyToClipboard',this);return false;">copy to clipboard</a><a href="#" onclick="dp.sh.Toolbar.Command('PrintSource',this);return false;">print</a><a href="#" onclick="dp.sh.Toolbar.Command('About',this);return false;">?</a></div></div><ol class="dp-c" start="1"><li class="alt"><div style="width: 472px;" class="alt"><span class="keyword">var</span><span>&nbsp;a&nbsp;=&nbsp;Array(</span><span class="string">'one'</span><span>,&nbsp;</span><span class="string">'two'</span><span>,&nbsp;</span><span class="string">'three'</span><span>);&nbsp; </span></div></li><li class=""><div style="width: 472px;" class="">a[12]&nbsp;=&nbsp;12;&nbsp; </div></li><li class="alt"><div style="width: 472px;" class="alt"><span class="comment">//&nbsp;this&nbsp;would&nbsp;result&nbsp;in&nbsp;an&nbsp;array&nbsp;with&nbsp;a&nbsp;length&nbsp;of&nbsp;13</span><span>&nbsp; </span></div></li><li class=""><div style="width: 472px;" class=""><span class="comment">//&nbsp;with&nbsp;3-12&nbsp;undefined.</span><span>&nbsp; </span></div></li></ol></div><pre style="display: none;" class="syntax-highlight:js"> var a = Array('one', 'two', 'three');
+ a[12] = 12;
+ // this would result in an array with a length of 13
+ // with 3-12 undefined.
+</pre>
+<p>The way the getters and setters are setup, unless I where to define
+ervythin’ there would be nothing waiting to assign an element to the
+internal array.</p>
+<p>Next Steps (if any)<br>
+Implement standard array features<br>
+Decide if push should be like an array push and create a new method for historical pushes.</p>
+<p>Last up<br>
+I also finally got around to figuring out qunit unit testing. It is
+really easy to use, not sure why I have not been using it longer. I
+have 19(?) tests right now, and they are in /test in the repo.</p>
+				</div>
+
+				<p class="postmetadata"> Posted in <a href="http://morglog.alleycatracing.com/wordpress/?cat=4" title="View all posts in JavaScript" rel="category">JavaScript</a> |   <a href="http://morglog.alleycatracing.com/wordpress/?p=49#respond" title="Comment on more histarray">No Comments »</a></p>
+			</div>
+
+		
+			<div class="post" id="post-48">
+				<h2><a href="http://morglog.alleycatracing.com/wordpress/?p=48" rel="bookmark" title="Permanent Link to histarray - An Experiment with Getters and Setters">histarray - An Experiment with Getters and Setters</a></h2>
+				<small>September 18th, 2008 <!-- by Morgan --></small>
+
+				<div class="entry">
+					<p>While
+doing an experiment with Getters and Setters I whipped together a small
+lib for a versioning array, the histarray. So far tested only in
+Firefox 3, it utilizes __defineGetter__(someNumber, function(){}) to
+return an element from an internal array (the history). Its push method
+will either overwrite the current revision if it is not the last, or
+push a new revision into the history. A Setter is also defined, so no
+matter where in the time line you currently are, that element will be
+updated.</p>
+<div class="dp-highlighter"><div class="bar"><div style="width: 491px;" class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;">view plain</a><a href="#" onclick="dp.sh.Toolbar.Command('CopyToClipboard',this);return false;">copy to clipboard</a><a href="#" onclick="dp.sh.Toolbar.Command('PrintSource',this);return false;">print</a><a href="#" onclick="dp.sh.Toolbar.Command('About',this);return false;">?</a></div></div><ol class="dp-c" start="1"><li class="alt"><div style="width: 491px;" class="alt"><span class="keyword">function</span><span>&nbsp;histarray()&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">{&nbsp; </div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>(</span><span class="keyword">var</span><span>&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;arguments.length;&nbsp;i++)&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>._add(arguments[i],&nbsp;i);&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>.__defineSetter__(</span><span class="string">'revision'</span><span>,&nbsp;</span><span class="keyword">function</span><span>(v)&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;(v&nbsp;&gt;&nbsp;</span><span class="keyword">this</span><span>.length)&nbsp;?&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>.revision&nbsp;:&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>._revision&nbsp;=&nbsp;v;&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;});&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>.__defineGetter__(</span><span class="string">'revision'</span><span>,&nbsp;</span><span class="keyword">function</span><span>()&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;</span><span class="keyword">this</span><span>._revision;&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;});&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>.__defineGetter__(</span><span class="string">'prev'</span><span>,&nbsp;</span><span class="keyword">function</span><span>()&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;(</span><span class="keyword">this</span><span>.revision&nbsp;!=&nbsp;0)&nbsp;?&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="keyword">function</span><span>(self)&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; </div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span><span>&nbsp;a&nbsp;=&nbsp;Array();&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>(</span><span class="keyword">var</span><span>&nbsp;i&nbsp;</span><span class="keyword">in</span><span>&nbsp;self._elements)&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a.push(self._elements[i][self.revision&nbsp;-&nbsp;1]);&nbsp;
+</div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;a;&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})(<span class="keyword">this</span><span>)&nbsp;:&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">null</span><span>;&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;});&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>.__defineGetter__(</span><span class="string">'nxt'</span><span>,&nbsp;</span><span class="keyword">function</span><span>()&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;(</span><span class="keyword">this</span><span>.revision&nbsp;&lt;&nbsp;</span><span class="keyword">this</span><span>.revisions)&nbsp;?&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<span class="keyword">function</span><span>(self)&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; </div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span><span>&nbsp;a&nbsp;=&nbsp;Array();&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>(</span><span class="keyword">var</span><span>&nbsp;i&nbsp;</span><span class="keyword">in</span><span>&nbsp;self._elements)&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a.push(self._elements[i][self.revision&nbsp;+&nbsp;1]);&nbsp;
+</div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;a;&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})(<span class="keyword">this</span><span>)&nbsp;:&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">null</span><span>;&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;});&nbsp; </div></li><li class=""><div style="width: 491px;" class="">};&nbsp; </div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp; </div></li><li class=""><div style="width: 491px;" class="">histarray.prototype&nbsp;=&nbsp; </div></li><li class="alt"><div style="width: 491px;" class="alt">{&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;length:&nbsp;0,&nbsp; </div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;revisions:&nbsp;0,&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;_elements:&nbsp;Array(),&nbsp; </div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;_revision:&nbsp;0,&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;_add:&nbsp;<span class="keyword">function</span><span>(e,&nbsp;i)&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>._elements[i]&nbsp;=&nbsp;(</span><span class="keyword">function</span><span>(e,self)&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">var</span><span>&nbsp;a&nbsp;=&nbsp;Array();&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>(</span><span class="keyword">var</span><span>&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;self.revisions;&nbsp;i++)&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a.push(<span class="keyword">null</span><span>);&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a.push(e);&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;a;&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})(e,<span class="keyword">this</span><span>);&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>.__defineGetter__(i,&nbsp;</span><span class="keyword">function</span><span>()&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;</span><span class="keyword">this</span><span>._elements[i][</span><span class="keyword">this</span><span>.revision];&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp; </div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>.__defineSetter__(i,&nbsp;</span><span class="keyword">function</span><span>(v)&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; </div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;</span><span class="keyword">this</span><span>._elements[i][</span><span class="keyword">this</span><span>.revision]&nbsp;=&nbsp;v;&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});&nbsp; </div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>.length&nbsp;=&nbsp;i&nbsp;+&nbsp;1;&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;},&nbsp; </div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;push&nbsp;csv&nbsp;or&nbsp;a&nbsp;single&nbsp;array</span><span>&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;push:&nbsp;<span class="keyword">function</span><span>()&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>(</span><span class="keyword">typeof</span><span>&nbsp;arguments[0]&nbsp;==&nbsp;</span><span class="string">'object'</span><span>)&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>.push.apply(</span><span class="keyword">this</span><span>,&nbsp;arguments[0]);&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><span>&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>(</span><span class="keyword">this</span><span>.revision&nbsp;==&nbsp;</span><span class="keyword">this</span><span>.revisions)&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>.revision++;&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>.revisions++;&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp; </div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span><span>(</span><span class="keyword">var</span><span>&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;arguments.length;&nbsp;i++)&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp; </div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>(arguments[i]&nbsp;==&nbsp;</span><span class="keyword">null</span><span>)&nbsp;</span><span class="keyword">continue</span><span>;&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp; </div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>(</span><span class="keyword">this</span><span>._elements[i])&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>._elements[i][</span><span class="keyword">this</span><span>.revision]&nbsp;=&nbsp;arguments[i];&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">else</span><span>&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">this</span><span>._add(arguments[i],&nbsp;i);&nbsp; </span></div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp; </div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp; </div></li><li class="alt"><div style="width: 491px;" class="alt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>&nbsp;</span><span class="keyword">this</span><span>.length;&nbsp; </span></div></li><li class=""><div style="width: 491px;" class="">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp; </div></li><li class="alt"><div style="width: 491px;" class="alt">};&nbsp; </div></li></ol></div><pre style="display: none;" class="syntax-highlight:js">function histarray()
+{
+	for(var i = 0; i &lt; arguments.length; i++)
+		this._add(arguments[i], i);
+
+	this.__defineSetter__('revision', function(v)
+	{
+		return (v &gt; this.length) ?
+			this.revision :
+			this._revision = v;
+	});
+	this.__defineGetter__('revision', function()
+	{
+		return this._revision;
+	});
+	this.__defineGetter__('prev', function()
+	{
+		return (this.revision != 0) ?
+			(function(self)
+			{
+				var a = Array();
+				for(var i in self._elements)
+					a.push(self._elements[i][self.revision - 1]);
+				return a;
+			})(this) :
+			null;
+	});
+	this.__defineGetter__('nxt', function()
+	{
+		return (this.revision &lt; this.revisions) ?
+			(function(self)
+			{
+				var a = Array();
+				for(var i in self._elements)
+					a.push(self._elements[i][self.revision + 1]);
+				return a;
+			})(this) :
+			null;
+	});
+};
+
+histarray.prototype =
+{
+	length: 0,
+	revisions: 0,
+	_elements: Array(),
+	_revision: 0,
+	_add: function(e, i)
+	{
+		this._elements[i] = (function(e,self)
+		{
+			var a = Array();
+			for(var i = 0; i &lt; self.revisions; i++)
+				a.push(null);
+			a.push(e);
+			return a;
+		})(e,this);
+		this.__defineGetter__(i, function()
+		{
+			return this._elements[i][this.revision];
+		});
+
+		this.__defineSetter__(i, function(v)
+		{
+			return this._elements[i][this.revision] = v;
+		});
+		this.length = i + 1;
+	},
+	// push csv or a single array
+	push: function()
+	{
+		if(typeof arguments[0] == 'object')
+			this.push.apply(this, arguments[0]);
+		else
+		{
+			if(this.revision == this.revisions)
+			{
+				this.revision++;
+				this.revisions++;
+			}
+			for(var i = 0; i &lt; arguments.length; i++)
+			{
+				if(arguments[i] == null) continue;
+
+				if(this._elements[i])
+					this._elements[i][this.revision] = arguments[i];
+				else
+					this._add(arguments[i], i);
+			}
+		}
+		return this.length;
+	}
+};
+</pre>
+<div class="dp-highlighter"><div class="bar"><div style="width: 550px;" class="tools"><a href="#" onclick="dp.sh.Toolbar.Command('ViewSource',this);return false;">view plain</a><a href="#" onclick="dp.sh.Toolbar.Command('CopyToClipboard',this);return false;">copy to clipboard</a><a href="#" onclick="dp.sh.Toolbar.Command('PrintSource',this);return false;">print</a><a href="#" onclick="dp.sh.Toolbar.Command('About',this);return false;">?</a></div></div><ol class="dp-c" start="1"><li class="alt"><div style="width: 550px;" class="alt"><span class="comment">//&nbsp;creates&nbsp;a&nbsp;new&nbsp;histarray.</span><span>&nbsp; </span></div></li><li class=""><div style="width: 550px;" class=""><span class="keyword">var</span><span>&nbsp;ha&nbsp;=&nbsp;</span><span class="keyword">new</span><span>&nbsp;histarray(</span><span class="string">'e1'</span><span>,&nbsp;</span><span class="string">'e2'</span><span>,&nbsp;</span><span class="string">'e3'</span><span>);&nbsp; </span></div></li><li class="alt"><div style="width: 550px;" class="alt"><span class="comment">//&nbsp;this&nbsp;is&nbsp;now&nbsp;just&nbsp;like&nbsp;a&nbsp;normal&nbsp;array,&nbsp;ha[0]&nbsp;==&nbsp;'e1'</span><span>&nbsp; </span></div></li><li class=""><div style="width: 550px;" class=""><span class="comment">//&nbsp;now&nbsp;using&nbsp;push&nbsp;does&nbsp;not&nbsp;add&nbsp;a&nbsp;new&nbsp;element,&nbsp;but&nbsp;instead&nbsp;adds&nbsp;a&nbsp;new&nbsp;revision</span><span>&nbsp; </span></div></li><li class="alt"><div style="width: 550px;" class="alt">ha.push(<span class="string">'e1v2'</span><span>,&nbsp;</span><span class="string">'e2v2'</span><span>,&nbsp;</span><span class="string">'e3v2'</span><span>)&nbsp; </span></div></li><li class=""><div style="width: 550px;" class=""><span class="comment">//&nbsp;now&nbsp;ha[0]&nbsp;==&nbsp;'e1v2'&nbsp;and&nbsp;ha.revision&nbsp;==&nbsp;1&nbsp;and&nbsp;ha.prev[0]&nbsp;==&nbsp;'e1'</span><span>&nbsp; </span></div></li><li class="alt"><div style="width: 550px;" class="alt"><span class="comment">//&nbsp;if&nbsp;we&nbsp;change&nbsp;the&nbsp;revision&nbsp;back&nbsp;to&nbsp;0</span><span>&nbsp; </span></div></li><li class=""><div style="width: 550px;" class="">ha.revision&nbsp;=&nbsp;0;&nbsp; </div></li><li class="alt"><div style="width: 550px;" class="alt"><span class="comment">//&nbsp;ha[0]&nbsp;==&nbsp;'e1',&nbsp;ha.nxt[0]&nbsp;==&nbsp;'e1v2'</span><span>&nbsp; </span></div></li><li class=""><div style="width: 550px;" class=""><span class="comment">//&nbsp;with&nbsp;the&nbsp;revision&nbsp;still&nbsp;at&nbsp;0,&nbsp;we&nbsp;can&nbsp;update&nbsp;an&nbsp;old&nbsp;element</span><span>&nbsp; </span></div></li><li class="alt"><div style="width: 550px;" class="alt">ha[0]&nbsp;=&nbsp;<span class="string">'e1a'</span><span>;&nbsp; </span></div></li><li class=""><div style="width: 550px;" class=""><span class="comment">//&nbsp;this&nbsp;just&nbsp;changes&nbsp;the&nbsp;first&nbsp;revision&nbsp;of&nbsp;the&nbsp;first&nbsp;element.</span><span>&nbsp; </span></div></li></ol></div><pre style="display: none;" class="syntax-highlight:js">// creates a new histarray.
+var ha = new histarray('e1', 'e2', 'e3');
+// this is now just like a normal array, ha[0] == 'e1'
+// now using push does not add a new element, but instead adds a new revision
+ha.push('e1v2', 'e2v2', 'e3v2')
+// now ha[0] == 'e1v2' and ha.revision == 1 and ha.prev[0] == 'e1'
+// if we change the revision back to 0
+ha.revision = 0;
+// ha[0] == 'e1', ha.nxt[0] == 'e1v2'
+// with the revision still at 0, we can update an old element
+ha[0] = 'e1a';
+// this just changes the first revision of the first element.
+</pre>
+<p>Not certain is will be useful for anything in particular. But I
+still have a couple ideas to add, and am interested in hear what people
+have to say about this.</p>
+				</div>
+
+				<p class="postmetadata"> Posted in <a href="http://morglog.alleycatracing.com/wordpress/?cat=35" title="View all posts in Developent" rel="category">Developent</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=4" title="View all posts in JavaScript" rel="category">JavaScript</a> |   <a href="http://morglog.alleycatracing.com/wordpress/?p=48#respond" title="Comment on histarray - An Experiment with Getters and Setters">No Comments »</a></p>
+			</div>
+
+		
+			<div class="post" id="post-47">
+				<h2><a href="http://morglog.alleycatracing.com/wordpress/?p=47" rel="bookmark" title="Permanent Link to jQuery Comet update (finally).">jQuery Comet update (finally).</a></h2>
+				<small>September 9th, 2008 <!-- by Morgan --></small>
+
+				<div class="entry">
+					<p>Now
+that I am semi-settled in here in Berlin (anyone have a room for rent?
+(cheap)), I am trying to get caught up on stuff. I finally pushed some
+fixes suggested by <a href="http://bassistance.de/">Jörn</a> and got the chat demo reported. Its all in the <a href="http://code.google.com/p/jquerycomet/source/checkout">SVN</a> at <a href="http://code.google.com/p/jquerycomet/">Google Code</a> and setup an external item in the <a href="http://code.google.com/p/jqueryjs/">jQuery</a> <a href="http://code.google.com/p/jqueryjs/source/checkout">SVN</a>. Also sent an email to <a href="http://blogs.webtide.com/gregw">Greg Wilkins</a> today, hopefully I can get this into the <a href="http://cometdproject.dojotoolkit.org/">Cometd</a> <a href="http://svn.cometd.com/">SVN</a> also.<br>
+Next release will be a total rewrite, I made a lot of mistakes in the
+original, and the prefer jQuery plugin style has changed. Getting back
+to this point will not be too difficult, and well worth it.</p>
+				</div>
+
+				<p class="postmetadata"> Posted in <a href="http://morglog.alleycatracing.com/wordpress/?cat=14" title="View all posts in AJAX" rel="category">AJAX</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=13" title="View all posts in Bayeux" rel="category">Bayeux</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=12" title="View all posts in Comet" rel="category">Comet</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=6" title="View all posts in JSON" rel="category">JSON</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=4" title="View all posts in JavaScript" rel="category">JavaScript</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=11" title="View all posts in jQuery" rel="category">jQuery</a> |   <a href="http://morglog.alleycatracing.com/wordpress/?p=47#comments" title="Comment on jQuery Comet update (finally).">1 Comment »</a></p>
+			</div>
+
+		
+			<div class="post" id="post-44">
+				<h2><a href="http://morglog.alleycatracing.com/wordpress/?p=44" rel="bookmark" title="Permanent Link to Euro to USD Ubiquity command">Euro to USD Ubiquity command</a></h2>
+				<small>September 5th, 2008 <!-- by Morgan --></small>
+
+				<div class="entry">
+					<p>I have been playing quite a bit with <a href="https://wiki.mozilla.org/Labs/Ubiquity">Ubiquity</a>
+lately. So far, I think it is really cool. One thing that has always
+prevented me from really getting into Firefox extension development is
+the constant restarting. I am a two or three line and test type of
+developer and that just does not work. But Ubiquity reload all the
+command every time you open it. And its got jQuery. Since I am living
+in German now but still earning the US Dollar, I am constantly
+concerned with the exchange rate and find myself visiting xe.com
+frequently. Perfect chance to make a new command. So far it just does
+Euro to USD, I hope to add all their options. <a href="http://morglog.alleycatracing.com/wordpress/?page_id=45">Here</a> it is.</p>
+				</div>
+
+				<p class="postmetadata"> Posted in <a href="http://morglog.alleycatracing.com/wordpress/?cat=29" title="View all posts in Firefox" rel="category">Firefox</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=4" title="View all posts in JavaScript" rel="category">JavaScript</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=40" title="View all posts in Ubiquity" rel="category">Ubiquity</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=11" title="View all posts in jQuery" rel="category">jQuery</a> |   <a href="http://morglog.alleycatracing.com/wordpress/?p=44#respond" title="Comment on Euro to USD Ubiquity command">No Comments »</a></p>
+			</div>
+
+		
+			<div class="post" id="post-43">
+				<h2><a href="http://morglog.alleycatracing.com/wordpress/?p=43" rel="bookmark" title="Permanent Link to Updates in the world of Morgan">Updates in the world of Morgan</a></h2>
+				<small>September 3rd, 2008 <!-- by Morgan --></small>
+
+				<div class="entry">
+					<p>With
+the major exception of USPS, Deutsche Post and DHL’s combined effort to
+loose my laptop, things are going great. I have been in Berlin for
+about three weeks now, landed an exciting new programming contract,
+looking like I found a rather cheap room to rent.</p>
+<p>So what have I been up to….. Since I do not have my regular laptop,
+the programming lad been kinda limited. I am working on my ASUS EEEpc
+(which I finally fixed) which has been, well, a bit of a pain in the
+ass. But surprisingly I have gotten used to it. But I have also gotten
+a new laptop (free too). So tomorrow I will be back to it, getting some
+really work done on a full sized screen. But I still have been working
+on some interesting stuff. For the new job, I have spent the last day
+familiarizing myself with the code already in place and doing a huge
+amount of cleanup. A lot of redundant code, good practices used in the
+wrong way, bad practices making things worse. But not too bad all in
+all. I have also been playing a lot with <a href="http://code.google.com/apis/v8/intro.html">V8</a>
+which I am super excited about. While I am not the best C++ programmer,
+I am a terrible Java programmer. So this is a great alternative to
+Rhino. And that’s not entirely true, I can guess and stumble through
+Java as well as C++, but Java’s build environment leaves me totally
+befuddled. I have also been playing around with <a href="http://fuse.sourceforge.net/">FUSE</a>
+again, and decided why not combined the two? So I made JsFS (I’ll post
+about this again later), but basically it create a jsin and jsout file,
+put Javascript into jsin and it is executed by V8 and the results are
+in jsout. Pretty useless yeah, but it was fun to make. I figure in the
+end I could make a Javascript interface for FUSE.<br>
+Bike News! I rode to Copenhagen two weeks ago. Well most of the way.
+Weather was not very cooperative and my friend I was riding with got
+injured to we ended up riding about half of it while hoping on and off
+trains. I am putting together a better mini-touring setup and will be
+riding to Geneva in about two weeks to race in the <a href="http://suicmc.ch/">Swiss Bike Messengers Championship</a>.<br>
+Also posted some <a href="http://flickr.com/photos/11556241@N06/">pictures</a>. Okay, thats enough out of me.</p>
+				</div>
+
+				<p class="postmetadata"> Posted in <a href="http://morglog.alleycatracing.com/wordpress/?cat=4" title="View all posts in JavaScript" rel="category">JavaScript</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=5" title="View all posts in Random" rel="category">Random</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=10" title="View all posts in Rant" rel="category">Rant</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=1" title="View all posts in Uncategorized" rel="category">Uncategorized</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=30" title="View all posts in Webdork" rel="category">Webdork</a> |   <a href="http://morglog.alleycatracing.com/wordpress/?p=43#respond" title="Comment on Updates in the world of Morgan">No Comments »</a></p>
+			</div>
+
+		
+			<div class="post" id="post-41">
+				<h2><a href="http://morglog.alleycatracing.com/wordpress/?p=41" rel="bookmark" title="Permanent Link to Move along">Move along</a></h2>
+				<small>July 17th, 2008 <!-- by Morgan --></small>
+
+				<div class="entry">
+					<p>After about a year and a half, I have decided to leave <a href="http://www.snitsig.com/">Snitsig</a> (<a href="http://www.snappystuff.com/">snappystuff.com</a>).
+The decision was made mostly due to my excessively long commute,
+sometime spending as much as 5 hours ‘going’ (lots of
+missed,delayed,slow trains and standing around) to and from work. But
+in the last year+ I really learned a lot. I went from ‘Nah, I do not
+use XML much’ to a near zealot for it (I have not forgotten about you
+JSON). I am doing things in PHP I did not think possible (Almost there
+PHP), had the opportunity to do a little more hardware/Interweb
+interaction and play with RFIDs again. Learned a TON about API
+writting. Most importantly I learned about working with a team. I am so
+used to working either along or with just one other person. It is
+really nice having other people to bounce ideas off of and collaborate
+with. Cheers to you <a href="http://www.snappystuff.com/">SnappStuff</a>, it was a pleasure working with you all, and I look forward to collaborating with you all again.</p>
+<p>And for me…. Meh, I’m fickle.</p>
+				</div>
+
+				<p class="postmetadata"> Posted in <a href="http://morglog.alleycatracing.com/wordpress/?cat=10" title="View all posts in Rant" rel="category">Rant</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=30" title="View all posts in Webdork" rel="category">Webdork</a> |   <a href="http://morglog.alleycatracing.com/wordpress/?p=41#respond" title="Comment on Move along">No Comments »</a></p>
+			</div>
+
+		
+			<div class="post" id="post-37">
+				<h2><a href="http://morglog.alleycatracing.com/wordpress/?p=37" rel="bookmark" title="Permanent Link to DBXMLAdmin updates">DBXMLAdmin updates</a></h2>
+				<small>May 29th, 2008 <!-- by Morgan --></small>
+
+				<div class="entry">
+					<p>After
+being completely annoyed by SimpleXML earlier I decided it was time to
+look at DBXML again. This time I ran across a forum posting saying that
+DBXML 2.4.11 had a bug in it preventing updating. After upgrading to
+2.4.13 I was able to update documents in a container. So I made some
+update to the <a href="http://code.google.com/p/dbxmladmin/">project</a>
+but realized that this was more of an out of control experiment than a
+real project. Already started redoing it, all the PHP is going to be
+new but I have managed to reuse most of the Javascript.</p>
+<p>I also found this site <a href="http://phpdbxml.4641.org/doku.php">DBXML With PHP</a>,
+it is a small wiki for, as the name says, using DBXML with PHP. It has
+not been updated in a while (until today) but I will keep adding things
+as I progress on DBXML. Hopefully other will help out too, right now
+there are few resources for DBXML in PHP.</p>
+				</div>
+
+				<p class="postmetadata"> Posted in <a href="http://morglog.alleycatracing.com/wordpress/?cat=14" title="View all posts in AJAX" rel="category">AJAX</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=34" title="View all posts in DBXML" rel="category">DBXML</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=4" title="View all posts in JavaScript" rel="category">JavaScript</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=7" title="View all posts in XML" rel="category">XML</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=11" title="View all posts in jQuery" rel="category">jQuery</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=3" title="View all posts in php" rel="category">php</a> |   <a href="http://morglog.alleycatracing.com/wordpress/?p=37#respond" title="Comment on DBXMLAdmin updates">No Comments »</a></p>
+			</div>
+
+		
+			<div class="post" id="post-36">
+				<h2><a href="http://morglog.alleycatracing.com/wordpress/?p=36" rel="bookmark" title="Permanent Link to jQuery multiSubSelector">jQuery multiSubSelector</a></h2>
+				<small>May 11th, 2008 <!-- by Morgan --></small>
+
+				<div class="entry">
+					<p>I am doing some work today on the <a href="http://code.google.com/p/dbxmladmin/">DBXML Admin</a>
+adding editable tag names, attributes and values like in Firebug. The
+way the HTML was laid out, the attributes each had a tag around them
+for styling. I was working on returning the LI/SPAN representation of
+the XML as an XML string for updating the server. The problem I was
+running into was in the way the selector was ordering the elements to
+be returned. The right way. What I wanted was different.<br>
+<code><br>
+$('li:eq(1)').find('span.tagName,span.tagAttr,span.tagAttrValue,span.tagValue');<br>
+</code><br>
+This worked fine if the node only had one or no attributes. But if
+there was more than one, it would group attribute names together and
+then group their values together. I know this could be solved with a
+bit of mapping or checking the tags while eaching, but making a new
+selector sounded funner.<br>
+So this is what I came up with. First I changed around the attribute
+tags. The span.tagAttr was a wrapper for the new span.tagAttrName and
+the original span.tagAttrValue. And the new subselector allow grabbing
+multiple descendant rather then just one ($(’<a href="http://docs.jquery.com/Selectors/descendant#ancestordescendant">ascendant descendant</a>‘))<br>
+<code><br>
+$('li:eq(1)'.find('span.tagName,span.tagAttr(span.tagAttrName,span.tagAttrValue),span.tagValue');<br>
+</code><br>
+Simple as that and I have everything in the order it was supposed to
+be. I know this could be accomplished several different way. It was
+more of an exercise in selectors, but in the end I think it addition to
+the selector engine.<br>
+<a href="http://morglog.alleycatracing.com/files/subselect.diff">Here</a> is a link to the patch for the current SVN.</p>
+				</div>
+
+				<p class="postmetadata"> Posted in <a href="http://morglog.alleycatracing.com/wordpress/?cat=4" title="View all posts in JavaScript" rel="category">JavaScript</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=7" title="View all posts in XML" rel="category">XML</a>,  <a href="http://morglog.alleycatracing.com/wordpress/?cat=11" title="View all posts in jQuery" rel="category">jQuery</a> |   <a href="http://morglog.alleycatracing.com/wordpress/?p=36#respond" title="Comment on jQuery multiSubSelector">No Comments »</a></p>
+			</div>
+
+		
+		<div class="navigation">
+			<div class="alignleft"><a href="http://morglog.alleycatracing.com/wordpress/?paged=2">« Older Entries</a></div>
+			<div class="alignright"></div>
+		</div>
+
+	
+	</div>
+
+	<div id="sidebar">
+		<ul>
+			
+
+<li id="archives" class="widget widget_archive"><h2 class="widgettitle">Archives</h2>		<ul>
+			<li><a href="http://morglog.alleycatracing.com/wordpress/?m=200811" title="November 2008">November 2008</a></li>
+	<li><a href="http://morglog.alleycatracing.com/wordpress/?m=200810" title="October 2008">October 2008</a></li>
+	<li><a href="http://morglog.alleycatracing.com/wordpress/?m=200809" title="September 2008">September 2008</a></li>
+	<li><a href="http://morglog.alleycatracing.com/wordpress/?m=200807" title="July 2008">July 2008</a></li>
+	<li><a href="http://morglog.alleycatracing.com/wordpress/?m=200805" title="May 2008">May 2008</a></li>
+	<li><a href="http://morglog.alleycatracing.com/wordpress/?m=200804" title="April 2008">April 2008</a></li>
+	<li><a href="http://morglog.alleycatracing.com/wordpress/?m=200802" title="February 2008">February 2008</a></li>
+	<li><a href="http://morglog.alleycatracing.com/wordpress/?m=200801" title="January 2008">January 2008</a></li>
+	<li><a href="http://morglog.alleycatracing.com/wordpress/?m=200712" title="December 2007">December 2007</a></li>
+	<li><a href="http://morglog.alleycatracing.com/wordpress/?m=200705" title="May 2007">May 2007</a></li>
+	<li><a href="http://morglog.alleycatracing.com/wordpress/?m=200704" title="April 2007">April 2007</a></li>
+		</ul>
+</li><li id="categories-1" class="widget widget_categories"><h2 class="widgettitle">Categories</h2>		<ul>
+			<li class="cat-item cat-item-14"><a href="http://morglog.alleycatracing.com/wordpress/?cat=14" title="View all posts filed under AJAX">AJAX</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="http://morglog.alleycatracing.com/wordpress/?cat=13" title="View all posts filed under Bayeux">Bayeux</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="http://morglog.alleycatracing.com/wordpress/?cat=9" title="View all posts filed under Bicycles">Bicycles</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="http://morglog.alleycatracing.com/wordpress/?cat=12" title="View all posts filed under Comet">Comet</a>
+</li>
+	<li class="cat-item cat-item-24"><a href="http://morglog.alleycatracing.com/wordpress/?cat=24" title="View all posts filed under CSS">CSS</a>
+</li>
+	<li class="cat-item cat-item-34"><a href="http://morglog.alleycatracing.com/wordpress/?cat=34" title="View all posts filed under DBXML">DBXML</a>
+</li>
+	<li class="cat-item cat-item-35"><a href="http://morglog.alleycatracing.com/wordpress/?cat=35" title="View all posts filed under Developent">Developent</a>
+</li>
+	<li class="cat-item cat-item-29"><a href="http://morglog.alleycatracing.com/wordpress/?cat=29" title="View all posts filed under Firefox">Firefox</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="http://morglog.alleycatracing.com/wordpress/?cat=23" title="View all posts filed under HTML">HTML</a>
+</li>
+	<li class="cat-item cat-item-41"><a href="http://morglog.alleycatracing.com/wordpress/?cat=41" title="View all posts filed under Java">Java</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://morglog.alleycatracing.com/wordpress/?cat=4" title="View all posts filed under JavaScript">JavaScript</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="http://morglog.alleycatracing.com/wordpress/?cat=11" title="View all posts filed under jQuery">jQuery</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="http://morglog.alleycatracing.com/wordpress/?cat=6" title="View all posts filed under JSON">JSON</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://morglog.alleycatracing.com/wordpress/?cat=3" title="View all posts filed under php">php</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://morglog.alleycatracing.com/wordpress/?cat=5" title="View all posts filed under Random">Random</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="http://morglog.alleycatracing.com/wordpress/?cat=10" title="View all posts filed under Rant">Rant</a>
+</li>
+	<li class="cat-item cat-item-40"><a href="http://morglog.alleycatracing.com/wordpress/?cat=40" title="View all posts filed under Ubiquity">Ubiquity</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://morglog.alleycatracing.com/wordpress/?cat=1" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-30"><a href="http://morglog.alleycatracing.com/wordpress/?cat=30" title="View all posts filed under Webdork">Webdork</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="http://morglog.alleycatracing.com/wordpress/?cat=7" title="View all posts filed under XML">XML</a>
+</li>
+		</ul>
+</li><li id="linkcat-2" class="widget widget_links"><h2 class="widgettitle">Blogroll</h2>
+	<ul>
+<li><a href="http://plugins.jquery.com/project/Comet">$.comet</a></li>
+<li><a href="http://www.snappystuff.com/" title="Online classifieds site I work on.">SnappyStuff.com</a></li>
+<li><a href="http://www.dice.cx/">Walt</a></li>
+
+	</ul>
+</li>
+		<li id="meta" class="widget widget_meta">			<h2 class="widgettitle">Meta</h2>			<ul>
+						<li><a href="http://morglog.alleycatracing.com/wordpress/wp-login.php">Log in</a></li>
+			<li><a href="http://morglog.alleycatracing.com/wordpress/?feed=rss2" title="Syndicate this site using RSS 2.0">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://morglog.alleycatracing.com/wordpress/?feed=comments-rss2" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>
+						</ul>
+		</li>		<li id="search" class="widget widget_search">			<form id="searchform" method="get" action="http://morglog.alleycatracing.com/wordpress">
+			<div>
+			<input name="s" id="s" size="15" type="text"><br>
+			<input value="Search" type="submit">
+			</div>
+			</form>
+		</li>		<li id="text-1" class="widget widget_text">						<div class="textwidget"></div>
+		</li><li id="tag_cloud" class="widget widget_tag_cloud"><h2 class="widgettitle">Tags</h2><a href="http://morglog.alleycatracing.com/wordpress/?tag=click" class="tag-link-33" title="1 topic" style="font-size: 8pt;">click</a>
+<a href="http://morglog.alleycatracing.com/wordpress/?tag=criterium" class="tag-link-18" title="1 topic" style="font-size: 8pt;">criterium</a>
+<a href="http://morglog.alleycatracing.com/wordpress/?tag=design" class="tag-link-25" title="1 topic" style="font-size: 8pt;">design</a>
+<a href="http://morglog.alleycatracing.com/wordpress/?tag=divs" class="tag-link-27" title="1 topic" style="font-size: 8pt;">divs</a>
+<a href="http://morglog.alleycatracing.com/wordpress/?tag=early-birds" class="tag-link-16" title="1 topic" style="font-size: 8pt;">early&nbsp;birds</a>
+<a href="http://morglog.alleycatracing.com/wordpress/?tag=erlang" class="tag-link-21" title="1 topic" style="font-size: 8pt;">erlang</a>
+<a href="http://morglog.alleycatracing.com/wordpress/?tag=erlycomet" class="tag-link-20" title="1 topic" style="font-size: 8pt;">erlycomet</a>
+<a href="http://morglog.alleycatracing.com/wordpress/?tag=firefox" class="tag-link-29" title="1 topic" style="font-size: 8pt;">Firefox</a>
+<a href="http://morglog.alleycatracing.com/wordpress/?tag=float" class="tag-link-28" title="1 topic" style="font-size: 8pt;">float</a>
+<a href="http://morglog.alleycatracing.com/wordpress/?tag=fremont" class="tag-link-17" title="1 topic" style="font-size: 8pt;">fremont</a>
+<a href="http://morglog.alleycatracing.com/wordpress/?tag=jquery-comet" class="tag-link-22" title="1 topic" style="font-size: 8pt;">jquery&nbsp;comet</a>
+<a href="http://morglog.alleycatracing.com/wordpress/?tag=lame" class="tag-link-32" title="1 topic" style="font-size: 8pt;">lame</a>
+<a href="http://morglog.alleycatracing.com/wordpress/?tag=liuqiud-layout" class="tag-link-26" title="1 topic" style="font-size: 8pt;">liuqiud&nbsp;layout</a>
+<a href="http://morglog.alleycatracing.com/wordpress/?tag=patch" class="tag-link-31" title="1 topic" style="font-size: 8pt;">patch</a>
+<a href="http://morglog.alleycatracing.com/wordpress/?tag=road-race" class="tag-link-19" title="1 topic" style="font-size: 8pt;">road&nbsp;race</a>
+<a href="http://morglog.alleycatracing.com/wordpress/?tag=victory" class="tag-link-15" title="1 topic" style="font-size: 8pt;">victory</a></li>		</ul>
+	</div>
+
+
+
+<hr>
+<div id="footer">
+<!-- If you'd like to support WordPress, having the "powered by" link somewhere on your blog is the best way; it's our only promotion or advertising. -->
+	<p>
+		☕MORGLOG is proudly powered by
+		<a href="http://wordpress.org/">WordPress</a>
+		<br><a href="http://morglog.alleycatracing.com/wordpress/?feed=rss2">Entries (RSS)</a>
+		and <a href="http://morglog.alleycatracing.com/wordpress/?feed=comments-rss2">Comments (RSS)</a>.
+		<!-- 20 queries. 2.880 seconds. -->
+	</p>
+</div>
+</div>
+
+<!-- Gorgeous design by Michael Heilemann - http://binarybonsai.com/kubrick/ -->
+
+		
+<!-- SyntaxHighlighter Stuff -->
+
+</body></html>

@@ -1,0 +1,636 @@
+
+
+
+
+
+@import url("layout.css");
+@import url("tumblrblue.css");  
+@import url("sidebar.css");
+
+
+
+
+
+html,body{
+	margin: 0;
+	padding: 0;
+	background-color: #6E8EAE;
+	overflow-x:hidden;
+    overflow-y:auto;
+}
+
+
+body {
+	padding: 0 0 0 0;
+	font-family: "Georgia", "Lucida Grande", "Lucida Sans Unicode", "Trebuchet MS", Verdana, Helvetica, sans-serif;
+
+	color: #242424;
+	text-align: center; 
+	width: 100%;
+	min-width: 1000px;
+	width:expression(document.body.clientWidth < 810? "800px": "auto");
+
+
+
+}
+
+
+#masthead h1{
+	color: #FA77E6;
+	margin: 0 0 0 2px;
+	padding: 140px 0 0 160px;
+	font-size: 16px;
+}
+#masthead h1 a{
+	color: #fff;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+#masthead h2{
+	color: White;
+	font-size: 12px;
+	margin-left: 70px;
+	padding-left: 100px;
+	padding-top: 0px;
+	height: 28px;
+	margin-top: 0px;
+}
+* html #masthead h2{
+	margin-left: 45x;
+	padding-left: 33px;
+	float: left;
+}
+a img {
+	border: none;
+}
+
+#headeradd{
+	margin-left: 40px;
+	margin-top: 30px;
+}
+
+
+acronym, abbr {
+	border-bottom: 1px dotted #B5DCFA;
+}
+
+
+
+
+acronym, abbr, span.caps {
+	cursor: help;
+	font-size: 11px;
+	letter-spacing: .07em;
+}
+
+
+
+
+
+
+
+
+blockquote {
+border-left:5px solid #CCCCCC;
+line-height:1.8em;
+margin-left:1.5em;
+padding-left:10px;
+padding-right:80px;
+}
+
+
+
+
+h1 {
+	margin: 25px 10px 20px 0px;
+	padding: 0px;
+	text-align: left;
+}
+
+
+
+
+
+
+
+
+h2 {
+	font-size: 22px;
+	font-weight: bold;
+	margin: 15px 20px 0 25px;
+	padding-bottom: 2px;
+
+}
+
+
+
+h3{
+	font-size: 20px;
+	font-weight: bolder;
+	text-transform: capitalize;
+	margin: 5px 100px 0 20px;
+	color: #242424;
+}
+
+
+h3.fix{
+	font-size: 20px;
+	font-weight: bolder;
+	text-transform: capitalize;
+	margin: 5px 0 0 20px;
+	color: #8C8C8C;
+}
+
+h3 a {
+	
+	margin: 0 0 -20 0;
+	padding: 0 0 -20 0;
+}
+
+h3 a {
+	font-size: 20px;
+	font-weight: bolder;
+	margin: 0 0 0 0px;
+	padding: 0 0 0 0;
+	color: #242424 ;
+   display: block;
+	text-decoration: none;
+	text-align: center
+}
+* html h3 a{
+	margin: 0 0 0 0;
+	padding: 0 0 0 0px;
+	width: 80%;
+}
+.date{
+	font-size: 10px;
+	font-weight: normal;
+	color: #74C0FA;
+}
+
+
+
+.storytitle {
+	display: block;
+	text-align: center 
+}
+
+
+
+h3 a:hover {
+
+	color: #242424;
+}
+
+
+h1 a:hover, h2 a:hover, .thecontent a:hover,   {
+			color: #74C0FA;
+}
+
+
+
+
+
+
+
+
+#getit{
+	margin-left: 10px;
+	margin-top: -30px;
+}
+
+
+h3#respond{
+	background: url(img/bobble.gif) no-repeat;
+	height: 49px;
+	padding: 42px 0 0 48px;
+	margin: 0 0 0 0;
+	color: #242424;
+	font-size: 15px;
+}
+h3#comments{
+	background: url(img/cornerarrow.gif) no-repeat;
+	height: 89px;
+	padding: 41px 0 0 163px;
+	margin: -5px 0 0 0;
+	color: #fff;
+	font-size: 14px;
+}
+
+
+
+
+
+
+p, li, .feedback {
+	font-size: 16px;
+	list-style-type:none;
+margin:3px 5px 0 10px;
+}
+
+
+
+
+
+
+ul.post-meta {
+	list-style: none;
+}
+
+
+
+
+
+
+
+
+ul.post-meta span.post-meta-key {
+	font-weight: bold;
+}
+
+
+
+
+.feedback {
+	color: #ccc;
+	text-align: left;
+	font-size: 11px;
+	float: right;
+	margin: -20px 20px 0 0;
+	padding: 0 0 0 0;
+}
+
+
+.feedback a{
+	color: #97C000;
+	text-decoration: none;
+	font-size: 11px;
+	cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#clearer {
+	clear: both;
+	margin: 0;
+	padding: 0;
+}
+.clearer{
+	clear: both;
+	margin: 0;
+	padding: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#content .post{
+	background: url(img/csbbody-r.gif) no-repeat bottom right;
+	
+	
+	color: #242424;
+	margin: 0 0 0 0;
+	padding-bottom:1px;
+
+
+	
+
+}
+
+fieldset { 
+	
+	-moz-border-radius: 8px; border-radius: 0 px; 
+	
+	} 
+
+
+#content .postop {
+			background: url(img/csbhead-r.gif) no-repeat top right;
+			margin: 0 0 0 0;
+			padding: 0 0 0 0;
+			text-align: center;
+}
+#content .postop .pheadfill {
+			background: url(img/csbhead-l.gif) no-repeat top left;
+			margin: 0 0 0 0;
+			padding: 10px 10px 5px 0;
+			color: white; 
+			font-weight: bold; 
+			font-size: 1.2em; 
+			line-height: 1em;
+		
+}
+
+
+
+
+#content .storycontent{
+			background: url(img/csbbody-l.gif) no-repeat bottom left;
+			margin: 0 0 0 0;
+			
+		
+			color: #242424;
+			
+		/*	text-align: center; 
+		padding-right:40px;
+		font-weight: bold;n*/
+    padding-left:40px;
+    padding-bottom:15px; 
+    padding-right:20px;
+
+}
+.thecontent{
+	width: 97%;
+	
+    padding-top:10px; 
+    background:white; 
+	/* text-align: center; 
+	padding-bottom:10px; 
+    padding-right: 10%; 
+   margin-right: 2.5em; 
+    margin-left: 2.5em; */
+    margin-bottom: 20px;
+
+	 
+
+}
+
+.thecontent a{
+color: #000141 !important;
+}
+
+.thecontent a:hover, .thecontent h1 a{
+color: #242424 !important;
+}
+
+
+
+.stem {
+	 position: relative; 
+	top: -17px;
+	left: 3%; 
+}
+
+.avatar {
+height:24px;
+margin-left:28px;
+margin-top:-20px;
+width:24px;
+}
+
+.pic:hover img{
+border: 1px solid #333333;
+}
+.pic:hover{
+color: #333333; /* Dummy definition to overcome IE bug */
+
+}
+
+.cc{
+		position: relative;
+	right: -4px;
+	top: -40px;
+}
+	
+.about{
+	position: relative;
+	right: 11px;
+	top: -25px;
+}
+
+
+
+
+
+#content .post .storycontent p img{
+
+border: none;
+margin-right: 15px;
+margin-bottom: 10px;
+text-align: center;
+}
+
+
+
+
+/*  roudn corners */
+
+
+
+
+.post p a{
+	color: #005B8B;
+	text-decoration: none;
+	font-style: bold;
+}
+
+/*
+.post p a:hover{
+	background: #242424;
+	color: White;
+}
+
+*/
+
+.post p {
+	margin: 20px 15px 20px 20px;
+	text-transform: none;
+	line-height:28px;
+}
+
+
+
+
+
+
+.noposts{
+	font-size: 20px;
+	color: White;
+	background: url(img/noposts.jpg) no-repeat top left;
+	height: 60px;
+	padding: 18px 0 0 75px;
+	margin-left: 80px
+}
+
+
+
+
+
+
+		
+h2#flickr{
+}
+
+
+
+
+
+
+#header, #header a:link {
+	font-size: 20px;
+	font-weight: normal;
+	color: #ccc;
+	text-decoration: none;
+}
+
+
+#header a:hover {
+	color: #c00;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.page_item {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+}
+
+
+
+
+
+
+.licontainer{
+	margin: 4px 0 0 0;
+	background: url(img/subitem.gif) repeat-x bottom left;
+	height: 40px;
+	float: left;
+}
+
+
+.logopic{
+	
+margin-left:-20px;
+margin-top:-10px;
+overflow:hidden;
+width:770px;
+
+	 
+ }
+	 
+ #thelogo{
+	 
+	 margin-bottom:0pt; 
+	 padding-bottom:20pt;
+	 height:0px;
+	 float:left;
+	 
+ }
+
+ #logocontent{
+
+margin-bottom:-1px !important;
+
+height: 200px;
+
+}
+
+.regular h1{
+
+	margin-left: 20px;
+	
+}
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  flickr integration */
+
+
+
+
+#flickr_badge_uber_wrapper{
+	margin-left: 17px;
+}
+
+
+
+
+#flickr_badge_wrapper img{
+	float: left;
+	margin-left: 5px;
+	margin-top: 5px;
+	border: 3px solid #E9F1F8;
+}
+
+
+
+
+
+
+
+
+/*  widgets */
+li a.rsswidget{
+	margin-left: 10px;
+}
+a.rsswidget{
+	text-decoration: none;
+	color: #9C9C9C;
+}
+.textwidget{
+	margin-left: 20px;
+	text-transform: none;
+}
+

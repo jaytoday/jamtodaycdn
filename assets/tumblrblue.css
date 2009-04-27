@@ -1,0 +1,268 @@
+
+
+    body {
+
+      color: #242424;
+      font: normal 1em/1.5em Georgia, serif;
+      margin: 0;
+      padding: 0;
+      text-align: center; /* f<style type="text/css">
+      
+      
+	
+</style>or ie5.5/win */
+
+
+    }
+    
+    
+    
+    
+    a, a:active, a:visited {
+      color: #ffffff !important;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    
+    a:hover {
+       color: #005B8B;
+    }
+    
+    blockquote, ol, p, ul {
+      margin: 0 0 1.5em;
+      padding: 0;
+    }
+    
+    ol, ul {
+      margin-left: 2em;
+      margin-right: 2em;
+    }
+    
+    blockquote {
+      border-left: 2px solid #005B8B;
+      margin-left: 1em;
+      padding: 0 2em 0 1em;
+    }
+    
+    h1, h2, h3, h5, h6 {
+      color: #FFFFFF;
+      margin: 0 0 1.5em;
+      padding: 0;
+    }
+    
+    h4{
+    color: #242424;
+    margin:2.5em 0 1em 1.6em;
+    }
+    
+    h1 {
+      font-size: 30px;
+      line-height: 1.2;
+      margin-bottom: .5em;
+    }
+    
+    /*
+    h1 a, h1 a:visited, h1 a:active {
+      color: #fffff;
+    }
+    */
+    
+    h1 a:hover {
+      color: #005B8B;
+      text-decoration: none;
+    }
+    
+    h2 {
+      color: #005B8B;
+      font-size: 1em;
+      margin-bottom: .5em;
+    }
+    
+    h3 {
+      font-size: 1.4em;
+    }
+    
+    
+    /* Content container */
+    
+    
+    #content {
+      margin: 0px auto 0;
+      text-align: left;
+      width: 50em;
+    }
+    
+    
+
+
+    
+    /* Metadata */
+    
+    
+    #meta {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      text-align: right;
+    }
+    
+    .jam {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      text-align: right;
+    }
+    
+    #meta li {
+      display: inline;
+    }
+    
+    
+    
+    /* Individual Posts */
+    
+    
+    
+    .post {
+      
+      padding: 0em 0 0em;
+      
+    }
+    
+    .post .date {
+      border-top: 3px solid #CCCCCC;
+      border-bottom: 1px solid #CCCCCC;
+      float: left;
+      padding: .25em 1em;
+      text-align: center;
+      margin: 0.25em 1em 0.25em 20px;
+      
+    }
+    
+    .post .date .month, .post .date .day, .post .date .time {
+      color: #999;
+      display: block;
+      font-weight: normal;
+    }
+    
+    .post .date .month {
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    
+    .post .date .day {
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+
+    .post .date a, .post .date a:visited, .post .date a:active {
+      font-weight: normal;
+    }
+    
+    .post .regular, .post .link, .post .conversation,
+    .post .photo, .post .video, .post .audio {
+      margin-left: -1em;
+      padding: 0;
+    }
+
+.post .quote  {   
+font-size:1.2em;
+margin-left:1em;
+margin-right:1em;
+
+}
+    
+    .post .photo .caption, .post .video .caption,
+    .post .quote .source, .post .audio .caption {
+      display: block;
+      margin-bottom: 1.5em;
+      margin-top: 1.5em;
+    }
+    
+    .post .quote .source {
+      font-style: italic;
+      text-align: right;
+      font-size: .9em;
+    }
+    
+    .post .conversation ul {
+      list-style: none;
+      margin: 0 .5em 1.5em;
+      padding: 0;
+    }
+    
+    .post .conversation ul li {
+      padding: .5em 0;
+    }
+    
+    .post .conversation ul li .person {
+      font-weight: bold;
+      margin-right: 1em;
+    }
+    
+    .post .post-footer {
+      color: #8C8C8C;
+      margin-left: 7em;
+      text-align: right;
+      margin-top:10px;
+  
+    }
+    
+    .post .post-footer .permalink, .post .post-footer .when {
+      font-size: .75em;
+      font-weight: normal;
+      margin-left: 1em;
+      
+    }
+    
+    /* Previous and Next Links */
+    
+    
+    
+    #prev-next {
+      margin-left: 7em;
+      padding: 1.5em 0 3em;
+    }
+    
+    #prev {
+      margin-right: 1.5em;
+      font-size: 1.4em;
+
+    }
+    
+    #next {
+      margin-left: 1.5em;
+      font-size: 1.4em;
+    }
+    
+    #footer {
+      border-top: 1px solid #8C8C8C;
+      font-size: .85em;
+    }
+    
+    #footer a, #footer a:active, #footer a:visited {
+      color: #CCCCCC;
+    }
+    
+    #footer ul {
+      list-style: none;
+      margin: 1em 0;
+      padding: 0;
+      text-align: center;
+    }
+    
+    #footer ul li {
+      display: inline;
+      margin: 0.5em;
+    }
+    
+    /* Custom CSS */
+    
+    {CustomCSS}
+    
+    .logo {
+float:left;
+margin-top:-7px;
+padding:0px 10pt 0px 5px;
+text-align:right;
+  }

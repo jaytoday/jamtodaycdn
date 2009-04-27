@@ -1,0 +1,61 @@
+.sideitem{
+
+text-align: center; 
+font-size: 1.3em; 
+margin-bottom:200px;
+}
+
+#sideitem{
+
+text-align: center; 
+font-size: 1.3em; 
+margin-bottom:200px;
+}
+
+#sideposts {
+
+position: absolute;
+margin-top: 70px;
+
+}
+
+
+.sidebar_content {
+float: right; width:17em; 
+margin:122px 40px 0px -40px;
+}
+
+
+#sidebartop {
+
+float: right; 
+width: 17em; 
+margin:282px 60px 0px 0px;
+
+}
+
+
+#sidebar {
+float:right;
+margin:22px 0 0 850px;
+position:absolute;
+width:17em;
+}
+
+#thesidecontent {
+	
+height:450px;
+margin-left:-24px;
+overflow:hidden;
+width:260px;
+}
+
+#side_storycontent {
+padding-bottom: 15px !important; 
+padding-right: 0px !important;
+padding-left:20px !important;
+}
+
+#sidestem {
+	margin-left:20px;
+}

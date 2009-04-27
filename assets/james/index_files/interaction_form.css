@@ -1,0 +1,14 @@
+/*       Source:  Global Cache                                                                */
+/*     Location:  css/api/interaction_form.css r81914                                         */
+/*      Machine:  10.1.0.28                                                                   */
+/*    Generated:  February 15th 2008 9:04:41 PM PST                                           */
+
+.int_feed_preview{border-top:solid 1px #D8DFEA;border-bottom:solid 1px #D8DFEA;padding:7px 8px;margin:15px 0px 10px;}
+.int_feed_preview .icon{float:left;width:16px;padding-right:10px;}
+.int_feed_preview .body{float:left;width:375px;}
+.int_feed_preview .story .body h2{background:none;font-size:11px;line-height:16px;border:none;color:black;font-weight:normal;}
+.int_dialog_body label{font-weight:normal;}
+.int_dialog_body .preview_label{font-size:11px;font-weight:bold;cursor:text;color:#333;float:left;width:70px;line-height:20px;}
+.int_dialog_body .preview_info_row{overflow:hidden;padding:5px 0px 0px;}
+.publish_option .int_feed_preview{margin-top:10px;border:solid 1px #D8DFEA;}
+.generic_dialog .generic_dialog_popup #pop_dialog_table{width:465px;}

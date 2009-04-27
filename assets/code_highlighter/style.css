@@ -1,0 +1,83 @@
+/* Code Highlighting
+   From http://www.danwebb.net/stylesheets/base.css */
+
+/** RUBY / JAVASCRIPT **/
+
+pre {
+  background: #141414;
+  color: #FFF;
+  padding: 1.5em;
+  -moz-border-radius: 5px 15px 5px 15px;
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -webkit-border-top-right-radius: 15px;
+  -webkit-border-bottom-left-radius: 15px;
+  overflow-x: auto;
+}
+
+code span.comment {
+  color: #BD48B3;
+}
+
+code span.string {
+  color: #61CE3C;
+}
+
+code span.brackets {
+}
+
+code span.symbol {
+  color: #6BCFF7;
+}
+
+code span.keywords {
+  color: #FF8400;
+}
+
+code span.erb {
+  background: #333;
+}
+
+code span.symbol {
+  color: #07DFFC;
+}
+
+code span.operators {
+  color: #FBDE2D;
+}
+
+code span.constants {
+  color: #D8FA3C;
+}
+
+
+/* Lyrics */
+/* TODO: Move out */
+
+div.lyrics {
+  height: 7em;
+  overflow: auto;
+  text-align: center;
+  color: #666;
+  font-family: italic;
+}
+
+/* More piggybacking */
+
+body {
+}
+
+h1 #the-pug-instamatic {
+  position: absolute;
+  bottom: -1px;
+  left: -20px;
+}
+
+/* Center images */
+div.photo img {
+  display: block;
+  margin: 0 auto;
+}
+div.photo br {
+  display: none;
+}

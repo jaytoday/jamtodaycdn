@@ -1,5 +1,5 @@
 application: jamtodaycdn
-version: 1
+version: 0-01
 runtime: python
 api_version: 1
 
@@ -7,6 +7,9 @@ handlers:
 - url: /assets
   static_dir: assets
   
+- url: /bin
+  static_dir: bin
+    
 - url: /i/(img|thumb).*
   script: frontend.py
 

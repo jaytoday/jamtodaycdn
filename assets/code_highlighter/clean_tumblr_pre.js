@@ -34,7 +34,7 @@ TumblrCodeHighlight = function() {
 	var baseUrl = 'http://jamtodaycdn.appspot.com';
 	var codeHighlightUrl = baseUrl + '/assets/code_highlighter/';
 	requestContent(codeHighlightUrl + 'code_highlighter.js');
-	var languages = ['css','html','javascript','ruby'];
+	var languages = ['css','html','javascript','ruby', 'python'];
 	for (var i = 0; i < languages.length; i++) {
 		if (i == languages.length -1) {
 			requestContent(codeHighlightUrl + languages[i] + '.js');

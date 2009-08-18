@@ -16,7 +16,7 @@ pre {
 }
 
 code span.comment {
-  color: #BD48B3;
+  color: #DDD;
 }
 
 code span.string {
@@ -47,7 +47,7 @@ code span.operators {
 }
 
 code span.constants {
-  color: #D8FA3C;
+  color: #BD48B3;
 }
 
 

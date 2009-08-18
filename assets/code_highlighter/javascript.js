@@ -5,6 +5,9 @@ CodeHighlighter.addStyle("javascript",{
 	brackets : {
 		exp  : /\(|\)/
 	},
+	operators : {
+		exp  : /(-|\*|\+|=|\.|:|\(|\)|\{|\})/
+	},
 	string : {
 		exp  : /'[^']*'|"[^"]*"/
 	},

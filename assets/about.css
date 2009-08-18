@@ -1,0 +1,49 @@
+ul.thumb {
+	float: left;
+	list-style: none;
+	margin: 0; padding: 10px;
+	width: 260px;
+}
+
+ul#blog_posts{
+margin: 0; padding:5px 0 20px;
+}
+
+ul#blog_posts li{
+font-size:1.1em; line-height:2em; display:block;
+}
+
+ul.thumb li {
+	margin: 0; padding: 5px;
+	float: left;
+	position: relative;  /* Set the absolute positioning base coordinate */
+	width: 110px;
+	height: 110px;
+}
+ul.thumb li img {
+	width: 100px; height: 100px; /* Set the small thumbnail size */
+	-ms-interpolation-mode: bicubic; /* IE Fix for Bicubic Scaling */
+	border: 1px solid #ddd;
+	padding: 5px;
+	background: #f0f0f0;
+	position: absolute;
+	left: 0; top: 0;
+}
+ul.thumb li img.hover {
+	background:url(thumb_bg.png) no-repeat center center;  /* Image used as background on hover effect
+	border: none; /* Get rid of border on hover */
+}
+
+#about_post h1, #about_post h2, #about_post h3, #about_post h4, #about_post h5, #about_post h6 { margin: 5px; padding: 0pt; }
+#about_post h1 { font-size: 2.2em; }
+#about_post h0 { font-size: 3em; }
+#about_post h2 {  font-size: 1.5em; line-height: 130%; }
+#about_post h3 { b font-size: 1.4em; line-height: 130%; }
+#about_post strong, #about_post em { font-size: 1.1em; }
+#about_post a { cursor:pointer; }
+#about_post blockquote { margin: 0pt 10px; font-size: larger; line-height: 1.5em; color: #443355; }
+#about_post p { margin: 0px 40px 0px 0px; padding: 10px; line-height: 20px; }
+#about_post .style7 { font-style: italic; }
+#about_post center.badges { float:left;
+margin:0 20px 10px;}
+#about_post center.badges div { float: left; margin: 0px 25px; }

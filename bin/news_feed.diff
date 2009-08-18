@@ -1,0 +1,598 @@
+diff -r a9dec4763c6b app/soc/cache/news_feed.py
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/cache/news_feed.py	Sun Jul 05 17:34:21 2009 -0700
+@@ -0,0 +1,99 @@
++#!/usr/bin/python2.5
++#
++# Copyright 2009 the Melange authors.
++#
++# Licensed under the Apache License, Version 2.0 (the "License");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#   http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an "AS IS" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++
++"""Module contains news_feed memcaching functions.
++"""
++
++__authors__ = [
++  'JamesLevy" <jamesalexanderlevy@gmail.com>',
++  ]
++
++
++import logging
++from google.appengine.api import memcache
++
++from soc.logic import accounts
++import soc.cache.base
++
++
++def key(func):
++  """Returns the memcache key for the news_feed.
++  """
++
++  entity = func.entity
++  return 'news_feed_for_%s_%s' % (entity.kind(), entity.key().id_or_name())
++
++
++def get(entity, *args, **kwargs):
++  """Retrieves the news_feed for the specified entity from the memcache.
++  """
++
++  # only cache the page for non-logged-in users
++  # TODO: figure out how to cache everything but the news_feed 
++  # also, no need to normalize as we don't use it anyway
++  if accounts.getCurrentAccount(normalize=False):
++    return (None, None)
++
++
++  logging.debug("CACHED ENTITY:" % entity) 
++  # if we can't retrieve the entity, leave it to the actual method
++  if not entity:
++    return (None, None)
++
++  memcache_key = key(entity)
++  logging.info("Retrieving %s" % memcache_key)
++  # pylint: disable-msg=E1101
++  return memcache.get(memcache_key), memcache_key
++
++def put(result, memcache_key, *args, **kwargs):
++  """Sets the news_feed  for the specified user in the memcache.
++
++  Args:
++    news_feed: the news_feed to be cached
++  """
++
++  # no sense in storing anything if we won't query it later on
++  # also, no need to normalize as we don't use it anyway
++  if accounts.getCurrentAccount(normalize=False):
++    return
++
++  # Store news_feed for just ten minutes to force a refresh every so often
++  retention = 10*60
++
++  logging.info("Setting %s" % memcache_key)
++  # pylint: disable-msg=E1101
++  memcache.add(memcache_key, result, retention)
++
++
++def flush(entity):
++  """Removes the news_feed for the entity from the memcache.
++
++  Also calls soc.cache.rights.flush for the specified user.
++
++  Args:
++    id: defaults to the current account if not set
++  """
++
++  memcache_key = key(entity)
++  logging.info("Flushing %s" % memcache_key)
++  # pylint: disable-msg=E1101
++  memcache.delete(memcache_key)
++
++
++# define the cache function
++cache = soc.cache.base.getCacher(get, put)
+diff -r a9dec4763c6b app/soc/logic/models/news_feed.py
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/logic/models/news_feed.py	Sun Jul 05 17:34:21 2009 -0700
+@@ -0,0 +1,101 @@
++#!/usr/bin/python2.5
++#
++# Copyright 2008 the Melange authors.
++#
++# Licensed under the Apache License, Version 2.0 (the "License");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#   http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an "AS IS" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++
++"""Newsfeed (Model) query functions.
++"""
++
++__authors__ = [
++  'JamesLevy" <jamesalexanderlevy@gmail.com>',
++  ]
++
++import logging
++from google.appengine.ext import db
++import soc.models.news_feed
++import soc.models.linkable 
++from soc.logic.models.user import logic as user_logic
++
++
++# custom url names
++# value should correlate to params['url_name'] in view
++# Regex sub() method could also be used to add the underscores.
++CUSTOM_URL_NAMES = { 
++'studentproject': 'student_project',
++'prioritygroup': 'priority_group',
++'studentproposal':'student_proposal', 
++'groupapp':'group_app', 
++'orgapp':'org_app', 
++'clubmember':'club_member', 
++'organization': 'org'
++}
++      
++      
++class Logic():
++  """Logic methods for the Newsfeed.
++  """
++
++  def __init__(self):
++    """ initiate logic module
++    """
++    pass
++
++  # this should be a background task
++  def addToFeed(self, sender, receivers, update_type, payload=None):
++    """Sends out a message if there is only one unread notification.
++    """
++
++    save_items = []
++    user = user_logic.getForCurrentAccount()
++    for receiver in receivers:
++      if not receiver: 
++         logging.warning('empty receiver sent for newsfeed item')
++         continue
++         
++        
++      
++      
++      url_name = CUSTOM_URL_NAMES.get(sender.kind().lower())
++      if not url_name: url_name = sender.kind().lower()
++      
++      new_feed_item = soc.models.news_feed.FeedItem( 
++      sender_key= str(sender.key()),      
++      # .should this just be key or key_name?
++      receiver_key = str(receiver.key()),
++      user = user,
++      update_type = update_type,
++      link = "/%s/show/%s" % (url_name, sender.key().name() ) 
++      )
++      if payload: new_feed_item.payload = payload
++      save_items.append(new_feed_item)
++    db.put(save_items)  
++    
++    
++
++  def retrieveFeed(self, entity, count=10):
++    """ Retrieves feed for a given entity 
++    """
++    # argh old method wasn't working at all...
++    # let's start from scratch.
++    
++    # use django time translation 
++    
++    feed_items = soc.models.news_feed.FeedItem.all().filter(
++    "receiver_key =", str(entity.key())).fetch(1000)
++    return feed_items[:count]
++    
++    
++        
++
++
++logic = Logic()
+diff -r a9dec4763c6b app/soc/models/news_feed.py
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/models/news_feed.py	Sun Jul 05 17:34:21 2009 -0700
+@@ -0,0 +1,68 @@
++#!/usr/bin/python2.5
++#
++# Copyright 2008 the Melange authors.
++#
++# Licensed under the Apache License, Version 2.0 (the "License");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++# 
++#   http://www.apache.org/licenses/LICENSE-2.0
++# 
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an "AS IS" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++
++"""This module contains the Newsfeed Model."""
++
++__authors__ = [
++  'JamesLevy" <jamesalexanderlevy@gmail.com>',
++]
++
++from google.appengine.ext import db
++from soc.models import base
++import soc.models.linkable 
++import soc.models.user
++
++class FeedItem(base.ModelWithFieldAttributes):
++  """ An item referencing an entity and its scope. 
++  """
++
++  # refers to the entity this feed item is about 
++  sender_key = db.StringProperty(required=False)
++  # refers to scope of feed where this item will appear 
++  receiver_key = db.StringProperty(required=False)
++  
++  user = db.ReferenceProperty(reference_class=soc.models.user.User,
++                                collection_name="feed_items",
++                                required=False)
++                                
++  update_type = db.StringProperty(required=False)
++
++  #scope = db.ReferenceProperty(soc.models.linkable.Linkable,
++  #required=True, collection_name='receieved_feed_items')
++  #entity = db.ReferenceProperty(soc.models.linkable.Linkable,
++  #required=False, collection_name='sent_feed_items')
++
++  update_type = db.StringProperty(required=True)
++  # link to sender page
++  link = db.StringProperty(required=True)
++  
++  
++  # a message or markup that go along with the feed item
++  payload = db.TextProperty(required=False)
++
++  #: date when the feed item was created
++  created = db.DateTimeProperty(auto_now_add=True)
++  #: date when the feed item was created (is it ever modified?) 
++  modified = db.DateTimeProperty(auto_now=True)  
++  # story, payload?
++  
++  def sender(self):
++    return db.get(self.sender_key)
++
++  def receiver(self):
++    print "BLAH"
++    return db.get(self.receiver_key)
++    
+diff -r a9dec4763c6b app/soc/templates/soc/news_feed/news_feed.html
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/templates/soc/news_feed/news_feed.html	Sun Jul 05 17:34:21 2009 -0700
+@@ -0,0 +1,41 @@
++<br/><br/><br/>
++
++<div class="news_feed">
++
++<h2>
++<a id="feed_icon" href="{{ feed_url }}">
++<img src="/soc/content/images/feed.gif"/></a>
++<a class="">Recent Updates:</a>
++</h2>
++
++<div class="inner">
++{% for item in feed_items %}
++{% if empty %}
++EMPTY
++{% endif %}
++<div class="entry">
++<div class="title"> 
++<a href="{{ item.link }}" >{{ item.sender.title }}</a> 
++ was {{ item.update_type }} by {{ item.user.name }}
++</div>
++<div class="time">{{ item.created|timesince }} ago</div>
++
++{# additional information <div class="snippet"></div> #}
++</div>
++{% endfor %}
++</div>
++
++
++</div>
++
++{% block scripts %} 
++ <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ feed_url }}"/>
++{{ block.super }} 
++{% endblock %}
++
++
++
++
++
++
++
++
++
+diff -r a9dec4763c6b app/soc/templates/soc/news_feed/news_feed.xml
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/templates/soc/news_feed/news_feed.xml	Sun Jul 05 17:34:21 2009 -0700
+@@ -0,0 +1,31 @@
++<?xml version="1.0" encoding="utf-8"?>
++<feed xmlns="http://www.w3.org/2005/Atom">
++  <title>{{ entity.kind.title }} Updates </title>
++  <link rel="self" type="application/atom+xml" href="{# source #}"/>
++  <updated>{{ feed_items.0.created }}</updated>
++  <id>{# source #}</id>
++
++  {% for item in feed_items %}
++  <entry>
++    <title>{{ item.sender.title }}</a> was 
++ {{ item.update_type }} by {{ item.user.name }}</title>
++    <id>{{item.key }}</id>
++    <updated>{{ item.created }}</updated>
++    <content type="html">
++    
++    <div class="title"> 
++    <a href="/{{ item.sender.kind.lower }}/show/{{ item.sender.key.name }}">
++ {{ item.sender.title }}</a> was {{ item.update_type }} by {{ item.user.name }}
++    </div>
++    
++    <div class="time">{{ item.created|timesince }} ago</div>
++
++    {# additional information <div class="snippet"></div> #}
++
++    </content>
++  </entry>
++  {% endfor %}
++  
++</feed>
++
++
++
++
+diff -r a9dec4763c6b app/soc/views/helper/news_feed.py
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/views/helper/news_feed.py	Sun Jul 05 17:34:21 2009 -0700
+@@ -0,0 +1,73 @@
++#!/usr/bin/python2.5
++#
++# Copyright 2008 the Melange authors.
++#
++# Licensed under the Apache License, Version 2.0 (the "License");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#   http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an "AS IS" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++
++"""Newsfeed (Model) view helper functions.
++"""
++
++__authors__ = [
++  'JamesLevy" <jamesalexanderlevy@gmail.com>',
++  ]
++  
++from soc.cache import news_feed
++
++class NewsFeed():
++  """
++  Render the NewsFeed module or XML of updates for a given entity
++  """ 
++  
++  def __init__(self, entity):
++    self.entity = entity
++  
++  
++  def getFeed(self): 
++    """gets HTML version of Newsfeed for entity
++    """ 
++    from django.template import loader
++    feed_items = self.retrieveFeed()
++    feed_url = self.getFeedUrl()
++    context = { 'feed_items': feed_items, 'feed_url': feed_url }
++    return loader.render_to_string('soc/news_feed/news_feed.html',
++                                     dictionary=context)
++    
++
++  def getFeedXML(self):
++    """gets XML version of Newsfeed for entity
++    """ 
++    feed_items = self.retrieveFeed()
++    feed_url = self.getFeedUrl()
++    template = 'soc/news_feed/news_feed.xml'
++    context = {'entity': self.entity, 'feed_items': feed_items, 'feed_url': feed_url }
++    return template, context
++
++
++  @news_feed.cache
++  def retrieveFeed(self):                            
++    from soc.logic.models.news_feed import logic as newsfeed_logic
++    return newsfeed_logic.retrieveFeed(self.entity)
++
++  def getFeedUrl(self):
++    """ retrieve the Feed URL for the entity
++    """ 
++    # should this be in redirects module? 
++    #return self.entity.sc
++    
++    # get the url name
++    from soc.logic.models.news_feed import CUSTOM_URL_NAMES
++    url_name = CUSTOM_URL_NAMES.get(self.entity.kind().lower())
++    if not url_name: url_name = self.entity.kind().lower()
++    # return formatted link
++    return "/%s/subscribe/%s" % (url_name, self.entity.key().name() )
++    
+diff -r a9dec4763c6b app/soc/templates/soc/group/public.html
+--- a/app/soc/templates/soc/group/public.html	Sun Jul 05 00:57:03 2009 +0200
++++ b/app/soc/templates/soc/group/public.html	Sun Jul 05 17:31:18 2009 -0700
+@@ -32,4 +32,7 @@
+   {% endblock %}
+  </table>
+ </p>
++{% if news_feed %} 
++{{ news_feed }}
++{% endif %}
+ {% endblock %}
+diff -r a9dec4763c6b app/soc/templates/soc/presence/public.html
+--- a/app/soc/templates/soc/presence/public.html	Sun Jul 05 00:57:03 2009 +0200
++++ b/app/soc/templates/soc/presence/public.html	Sun Jul 05 17:31:18 2009 -0700
+@@ -32,4 +32,8 @@
+   <!-- TODO(pawel.solyga) make this generic -->
+  </table>
+ </p>
++{% if news_feed %} 
++{{ news_feed }}
++{% endif %}
+ {% endblock %}
++
+diff -r a9dec4763c6b app/soc/templates/soc/program/public.html
+--- a/app/soc/templates/soc/program/public.html	Sun Jul 05 00:57:03 2009 +0200
++++ b/app/soc/templates/soc/program/public.html	Sun Jul 05 17:31:18 2009 -0700
+@@ -30,4 +30,7 @@
+   <!-- TODO(pawel.solyga) make this generic -->
+  </table>
+ </p>
++{% if news_feed %} 
++{{ news_feed }}
++{% endif %}
+ {% endblock %}
+diff -r a9dec4763c6b app/soc/templates/soc/site/public.html
+--- a/app/soc/templates/soc/site/public.html	Sun Jul 05 00:57:03 2009 +0200
++++ b/app/soc/templates/soc/site/public.html	Sun Jul 05 17:31:18 2009 -0700
+@@ -34,4 +34,7 @@
+   <!-- TODO(pawel.solyga) make this generic -->
+  </table>
+ </p>
++{% if news_feed %} 
++{{ news_feed }}
++{% endif %}
+ {% endblock %}diff -r a9dec4763c6b app/soc/templates/soc/group/public.html
+--- a/app/soc/templates/soc/group/public.html	Sun Jul 05 00:57:03 2009 +0200
++++ b/app/soc/templates/soc/group/public.html	Sun Jul 05 17:31:18 2009 -0700
+@@ -32,4 +32,7 @@
+   {% endblock %}
+  </table>
+ </p>
++{% if news_feed %} 
++{{ news_feed }}
++{% endif %}
+ {% endblock %}
+diff -r a9dec4763c6b app/soc/templates/soc/presence/public.html
+--- a/app/soc/templates/soc/presence/public.html	Sun Jul 05 00:57:03 2009 +0200
++++ b/app/soc/templates/soc/presence/public.html	Sun Jul 05 17:31:18 2009 -0700
+@@ -32,4 +32,8 @@
+   <!-- TODO(pawel.solyga) make this generic -->
+  </table>
+ </p>
++{% if news_feed %} 
++{{ news_feed }}
++{% endif %}
+ {% endblock %}
++
+diff -r a9dec4763c6b app/soc/templates/soc/program/public.html
+--- a/app/soc/templates/soc/program/public.html	Sun Jul 05 00:57:03 2009 +0200
++++ b/app/soc/templates/soc/program/public.html	Sun Jul 05 17:31:18 2009 -0700
+@@ -30,4 +30,7 @@
+   <!-- TODO(pawel.solyga) make this generic -->
+  </table>
+ </p>
++{% if news_feed %} 
++{{ news_feed }}
++{% endif %}
+ {% endblock %}
+diff -r a9dec4763c6b app/soc/templates/soc/site/public.html
+--- a/app/soc/templates/soc/site/public.html	Sun Jul 05 00:57:03 2009 +0200
++++ b/app/soc/templates/soc/site/public.html	Sun Jul 05 17:31:18 2009 -0700
+@@ -34,4 +34,7 @@
+   <!-- TODO(pawel.solyga) make this generic -->
+  </table>
+ </p>
++{% if news_feed %} 
++{{ news_feed }}
++{% endif %}
+ {% endblock %}
+diff -r a9dec4763c6b app/soc/views/helper/params.py
+--- a/app/soc/views/helper/params.py	Sun Jul 05 00:57:03 2009 +0200
++++ b/app/soc/views/helper/params.py	Sun Jul 05 17:31:18 2009 -0700
+@@ -99,6 +99,7 @@
+   rights['unspecified'] = []
+   rights['any_access'] = ['checkIsLoggedIn']
+   rights['show'] = ['checkIsUser']
++  rights['subscribe'] = ['checkIsUser']
+   rights['create'] = ['checkIsDeveloper']
+   rights['edit'] = ['checkIsDeveloper']
+   rights['delete'] = ['checkIsDeveloper']
+@@ -123,6 +124,9 @@
+   if 'document_prefix' not in params:
+     params['document_prefix'] = params['url_name']
+ 
++  if 'subscribe' not in params:
++    params['subscribe'] = rights['subscribe']
++    
+   # Do not expand edit_redirect to allow it to be overwritten without suffix
+   new_params['edit_redirect'] = '/%(url_name)s/edit/%(suffix)s'
+   new_params['missing_redirect'] = '/%(url_name)s/create' % params
+@@ -225,6 +229,12 @@
+          '%(module_package)s.%(module_name)s.list_public', 
+          'List %(name_plural)s')]
+ 
++  if params.get('subscribe'):
++    new_params['django_patterns_defaults'] += [
++        (r'^%(url_name)s/(?P<access_type>subscribe)/%(key_fields)s$',
++         '%(module_package)s.%(module_name)s.subscribe', 
++         'Subscribe %(name_plural)s')]
++         
+   new_params['public_template'] = 'soc/%(module_name)s/public.html' % params
+   new_params['export_template'] = 'soc/export.html'
+   new_params['create_template'] = 'soc/models/edit.html'
+
+diff -r a9dec4763c6b app/soc/views/helper/params.py
+--- a/app/soc/views/helper/params.py	Sun Jul 05 00:57:03 2009 +0200
++++ b/app/soc/views/helper/params.py	Sun Jul 05 17:31:18 2009 -0700
+@@ -99,6 +99,7 @@
+   rights['unspecified'] = []
+   rights['any_access'] = ['checkIsLoggedIn']
+   rights['show'] = ['checkIsUser']
++  rights['subscribe'] = ['checkIsUser']
+   rights['create'] = ['checkIsDeveloper']
+   rights['edit'] = ['checkIsDeveloper']
+   rights['delete'] = ['checkIsDeveloper']
+@@ -123,6 +124,9 @@
+   if 'document_prefix' not in params:
+     params['document_prefix'] = params['url_name']
+ 
++  if 'subscribe' not in params:
++    params['subscribe'] = rights['subscribe']
++    
+   # Do not expand edit_redirect to allow it to be overwritten without suffix
+   new_params['edit_redirect'] = '/%(url_name)s/edit/%(suffix)s'
+   new_params['missing_redirect'] = '/%(url_name)s/create' % params
+@@ -225,6 +229,12 @@
+          '%(module_package)s.%(module_name)s.list_public', 
+          'List %(name_plural)s')]
+ 
++  if params.get('subscribe'):
++    new_params['django_patterns_defaults'] += [
++        (r'^%(url_name)s/(?P<access_type>subscribe)/%(key_fields)s$',
++         '%(module_package)s.%(module_name)s.subscribe', 
++         'Subscribe %(name_plural)s')]
++         
+   new_params['public_template'] = 'soc/%(module_name)s/public.html' % params
+   new_params['export_template'] = 'soc/export.html'
+   new_params['create_template'] = 'soc/models/edit.html'

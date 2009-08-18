@@ -1,0 +1,1304 @@
+diff -r 6545e6e184bb app/soc/content/css/soc-090421.css
+--- a/app/soc/content/css/soc-090421.css	Sun May 10 02:38:57 2009 +0200
++++ b/app/soc/content/css/soc-090421.css	Mon May 11 11:45:29 2009 -0700
+@@ -644,3 +644,39 @@
+   border:0 none;
+   color:black;
+ }
++
++
++/* Surveys */
++
++div#survey_widget{
++margin:30px;
++-moz-border-radius-bottomleft:5px;
++-moz-border-radius-bottomright:5px;
++-moz-border-radius-topleft:5px;
++-moz-border-radius-topright:5px;
++background-color:#FFFEEB;
++border:5px solid #F7CA75;
++padding: 15px;
++width:550px;
++}
++
++div#survey_options{
++margin: 20px 0 0 0;
++}
++
++div#survey_options button{
++display:block;
++margin:10px 0 0;
++}
++
++div#survey_widget textarea{
++padding: 10px;
++}
++div#survey_widget a.delete{
++margin:0 7px;
++}
++
++div#survey_widget label{
++display:block;
++max-width:170px;
++}
+diff -r 6545e6e184bb app/soc/content/js/edit_survey.js
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/content/js/edit_survey.js	Mon May 11 11:45:29 2009 -0700
+@@ -0,0 +1,159 @@
++   
++    var DEFAULT_LONG_ANSWER_TEXT = 'Write a Custom Prompt...';
++    var DEFAULT_SHORT_ANSWER_TEXT = 'Write a Custom Prompt...';
++    var DEFAULT_OPTION_TEXT = 'Add A New Option...';
++    
++    
++jQuery.fn.extend({
++	preserveDefaultText: function(defaultValue, replaceValue)
++	{
++		$(this).focus(function()
++		{
++			if(typeof(replaceValue) == 'undefined')
++				replaceValue = '';  
++			if($(this).val() == defaultValue)
++				$(this).val(replaceValue);
++		});
++
++		$(this).blur(function(){  
++			if(typeof(replaceValue) == 'undefined')
++				replaceValue = '';  
++			if($(this).val() == replaceValue)
++				$(this).val(defaultValue);
++		});
++		return $(this).val(defaultValue);
++	}
++});
++    
++   $(function(){
++   
++   var widget = $('div#survey_widget');
++   widget.parents('td.formfieldvalue:first').css({ 'float': 'left', 
++                                                   'width': 200 });
++
++   var survey = widget.find('tbody:first')
++   var options = $('div#survey_options');
++   
++   var del_el = "<a class='delete'><img src='/soc/content/images/minus.gif'/></a>";
++   var default_option = "<option>" + DEFAULT_OPTION_TEXT + "</option>";
++   
++   
++   // Setup for existing surveys
++   widget.find('label').prepend(del_el).end()
++         .find('select').append(default_option)
++                        .each(function(){
++                        $(this).attr('name', 'survey_selection__' + $(this).attr('name') ) });
++
++         widget.find('input').each(function(){
++         $(this).attr('name', 'survey_short_answer__' + $(this).attr('name') ) });
++
++         widget.find('textarea').each(function(){
++         $(this).attr('name', 'survey_long_answer__' + $(this).attr('name') ) });
++   
++   
++   options.find('button').click(function(e){
++
++   var field_template =  $("<tr><th><label>" + del_el + "</label></th><td>  </td></tr>");
++
++   var field_name = prompt('enter a field name');
++   if (!field_name) return alert('invalid field name');
++   
++new_field = false;
++var type = $(this).attr('id') + "__";
++
++switch($(this).attr('id')){
++case "short_answer":  
++var new_field = "<input type='text' />";
++break;
++
++case "long_answer":  
++var new_field = "<textarea cols='40' rows='10' />";
++break;
++
++case "selection": 
++var new_field = "<select><option></option>" + default_option + "</select>";
++break;
++}
++
++if (new_field) {
++    new_field = $(new_field);
++    $(new_field).attr({ 'id': 'id_' + field_name, 'name': 'survey_' + type + field_name });
++	field_template.find('label').attr('for', 'id_' + field_name)
++	                                         .append(field_name + ":").end()
++				  .find('td').append(new_field).find(new_field);
++	survey.append(field_template).trigger('init'); 
++
++}
++   });
++   
++   
++
++ 
++survey.bind('init', function(){
++
++
++widget.find('input').each(function(){ 
++if ($(this).val().length < 1 | $(this).val() == DEFAULT_SHORT_ANSWER_TEXT) $(this).preserveDefaultText(DEFAULT_SHORT_ANSWER_TEXT); 
++}); 
++
++widget.find('textarea').each(function(){ 
++if ($(this).val().length < 1 | $(this).val() == DEFAULT_LONG_ANSWER_TEXT) $(this).preserveDefaultText(DEFAULT_LONG_ANSWER_TEXT);
++}); 
++
++widget.find('select').change(function(){
++
++if ($(this).find('option:selected').text() == DEFAULT_OPTION_TEXT) {
++var option_name = prompt("Name the new option");
++if (option_name == null) return false; if (option_name.length < 1) return false;
++$(this).prepend("<option>" + option_name + "</option>").find('option').each(function(){
++   if ($(this).val().length < 1) $(this).remove();
++}).end().find('option:first').attr('selected', 'selected');
++
++}
++
++});
++
++
++widget.find('a.delete img').click(function(){
++	this_field = $(this).parents('tr:first');
++delete_this = confirm("Are you sure you want to delete this field?");
++if (delete_this) this_field.remove();
++});
++
++
++}).trigger('init');
++
++
++
++
++// Bind submit
++
++$('form').bind('submit', function(){
++ 
++ // Get all options for select menus
++ widget.hide().find('select').each(function(){
++ 	options = Array();
++ 	$(this).find('option').each(function(){
++ 	if ($(this).text() != DEFAULT_OPTION_TEXT) options.push($(this).text());
++	});
++	$(this).html('').append("<option selected='selected'>" + options + "</option>")
++});
++ 		
++
++
++widget.find('input').each(function(){ 
++if ( $(this).val() == DEFAULT_SHORT_ANSWER_TEXT) $(this).val('');
++}); 
++
++widget.find('textarea').each(function(){ 
++if ($(this).val() == DEFAULT_LONG_ANSWER_TEXT) $(this).val('');
++}); 
++
++ $('input#id_s_html').val(widget.find('div#survey_options').remove().end().html()); // only needed for HTML
++ 
++});
++
++  
++   
++   });
++   
+diff -r 6545e6e184bb app/soc/content/js/take_survey.js
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/content/js/take_survey.js	Mon May 11 11:45:29 2009 -0700
+@@ -0,0 +1,56 @@
++
++    
++jQuery.fn.extend({
++	preserveDefaultText: function(defaultValue, replaceValue)
++	{
++		$(this).focus(function()
++		{
++			if(typeof(replaceValue) == 'undefined')
++				replaceValue = '';  
++			if($(this).val() == defaultValue)
++				$(this).val(replaceValue);
++		});
++
++		$(this).blur(function(){  
++			if(typeof(replaceValue) == 'undefined')
++				replaceValue = '';  
++			if($(this).val() == replaceValue)
++				$(this).val(defaultValue);
++		});
++		return $(this).val(defaultValue);
++	}
++});
++    
++   $(function(){
++   
++   var widget = $('div#survey_widget');
++   widget.parents('td.formfieldvalue:first').css({ 'float': 'left', 
++                                                   'width': 200 });
++
++   var survey = widget.find('tbody:first');
++   
++
++if (widget.hasClass('create')) { 
++widget.find('input').each(function(){ 
++ $(this).preserveDefaultText($(this).val()); 
++}); 
++
++widget.find('textarea').each(function(){ 
++$(this).preserveDefaultText($(this).val());
++}); 
++
++widget.find('select').change(function(){
++});
++
++}
++
++// Bind submit
++
++$('form').bind('submit', function(){
++ $('input#id_s_html').val(widget.find('div#survey_options').remove().end().html());
++});
++
++  
++   
++   });
++   
+diff -r 6545e6e184bb app/soc/logic/models/survey.py
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/logic/models/survey.py	Mon May 11 11:45:29 2009 -0700
+@@ -0,0 +1,183 @@
++#!/usr/bin/python2.5
++#
++# Copyright 2008 the Melange authors.
++#
++# Licensed under the Apache License, Version 2.0 (the "License");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#   http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an "AS IS" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++
++"""Survey (Model) query functions.
++"""
++
++__authors__ = [
++  'JamesLevy" <jamesalexanderlevy@gmail.com>',
++  ]
++
++
++from soc.cache import sidebar
++from soc.cache import home
++from soc.logic.models import work
++from soc.logic.models import linkable as linkable_logic
++from soc.models.survey import SurveyContent, Survey, SurveyRecord
++import soc.models.work
++
++
++class Logic(work.Logic):
++  """Logic methods for the Survey model
++  """
++
++  def __init__(self, model=Survey,
++               base_model=soc.models.work.Work, scope_logic=linkable_logic):
++    """Defines the name, key_name and model for this entity.
++    """
++
++    super(Logic, self).__init__(model=model, base_model=base_model,
++                                scope_logic=scope_logic)
++
++
++  def create_survey(self, survey_fields, schema, this_survey=False):
++    """ Create a new survey from prototype
++    """
++
++    if not this_survey: this_survey = SurveyContent()
++    else: 
++        # wipe clean existing dynamic properties if they exist
++        for prop in this_survey.dynamic_properties():
++        	delattr(this_survey, prop) 
++    for name, value in survey_fields.items(): setattr(this_survey, name, value)
++    this_survey.set_schema(schema)
++    from google.appengine.ext import db
++    db.put(this_survey)
++    return this_survey
++
++  def create_survey_record(self, user, survey_entity, survey_fields):
++    """ Create a new survey record
++    """
++
++    survey_record = SurveyRecord.gql("WHERE user = :1 AND this_survey = :2", user, survey_entity).get() 
++    if survey_record:
++    	for prop in survey_record.dynamic_properties(): 
++    	    delattr(survey_record, prop) 
++    if not survey_record: survey_record = SurveyRecord(
++                     user = user,
++                     this_survey = survey_entity
++                     )
++    for name, value in survey_fields.items(): setattr(survey_record, name, value)
++    from google.appengine.ext import db
++    db.put(survey_record)
++    return survey_record
++
++    
++    
++    
++    
++  def getKeyValuesFromEntity(self, entity):
++    """See base.Logic.getKeyNameValues.
++    """
++
++    return [entity.prefix, entity.scope_path, entity.link_id]
++
++  def getKeyValuesFromFields(self, fields):
++    """See base.Logic.getKeyValuesFromFields.
++    """
++
++    return [fields['prefix'], fields['scope_path'], fields['link_id']]
++
++  def getKeyFieldNames(self):
++    """See base.Logic.getKeyFieldNames.
++    """
++
++    return ['prefix', 'scope_path', 'link_id']
++
++  def isDeletable(self, entity):
++    """See base.Logic.isDeletable.
++    """
++
++    return not entity.home_for
++
++  def _updateField(self, entity, entity_properties, name):
++    """Special logic for role. If state changes to active we flush the sidebar.
++    """
++    value = entity_properties[name]
++
++    
++    if (name == 'is_featured') and (entity.is_featured != value):
++      sidebar.flush()
++
++    home_for = entity.home_for
++
++    if (name != 'home_for') and home_for:
++      home.flush(home_for)
++
++    return True
++
++
++logic = Logic()
++
++
++class ResultsLogic(work.Logic):
++  """Logic methods for the Survey model
++  """
++
++  def __init__(self, model=SurveyRecord,
++               base_model=soc.models.work.Work, scope_logic=linkable_logic):
++    """Defines the name, key_name and model for this entity.
++    """
++
++    super(ResultsLogic, self).__init__(model=model, base_model=base_model,
++                                scope_logic=scope_logic)
++
++
++
++    
++  def getKeyValuesFromEntity(self, entity):
++    """See base.Logic.getKeyNameValues.
++    """
++
++    return [entity.prefix, entity.scope_path, entity.link_id]
++
++  def getKeyValuesFromFields(self, fields):
++    """See base.Logic.getKeyValuesFromFields.
++    """
++
++    return [fields['prefix'], fields['scope_path'], fields['link_id']]
++
++  def getKeyFieldNames(self):
++    """See base.Logic.getKeyFieldNames.
++    """
++
++    return ['prefix', 'scope_path', 'link_id']
++
++  def isDeletable(self, entity):
++    """See base.Logic.isDeletable.
++    """
++
++    return not entity.home_for
++
++  def _updateField(self, entity, entity_properties, name):
++    """Special logic for role. If state changes to active we flush the sidebar.
++    """
++    value = entity_properties[name]
++
++    
++    if (name == 'is_featured') and (entity.is_featured != value):
++      sidebar.flush()
++
++    home_for = entity.home_for
++
++    if (name != 'home_for') and home_for:
++      home.flush(home_for)
++
++    return True
++
++
++results_logic = ResultsLogic()
++
+diff -r 6545e6e184bb app/soc/models/survey.py
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/models/survey.py	Mon May 11 11:45:29 2009 -0700
+@@ -0,0 +1,128 @@
++#!/usr/bin/python2.5
++#
++# Copyright 2008 the Melange authors.
++#
++# Licensed under the Apache License, Version 2.0 (the "License");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++# 
++#   http://www.apache.org/licenses/LICENSE-2.0
++# 
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an "AS IS" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++
++"""This module contains the Survey Model."""
++
++__authors__ = [
++  'JamesLevy" <jamesalexanderlevy@gmail.com>',
++]
++
++
++from google.appengine.ext import db
++
++from django.utils.translation import ugettext
++
++import soc.models.linkable
++import soc.models.work
++import soc.models.user
++
++
++
++class SurveyContent(db.Expando):
++  """Expando Class for Surveys
++  
++     Each survey entity consists of properties where names and default
++     values are set by the survey creator as survey fields. 
++  """
++  schema = db.StringProperty() # hidden 
++  created = db.DateTimeProperty(auto_now_add=True)
++  modified = db.DateTimeProperty(auto_now=True)
++
++  def set_schema(self, schema):
++  	 self.schema = str(schema)
++
++  def get_schema(self):
++  	 return eval(self.schema)
++
++  	 
++class Survey(soc.models.work.Work):
++  """Model of a survey.
++  
++  This model describes meta-information and permissions.
++  
++  The actual questions of the survey are contained in the SurveyContent entity. 
++  
++  """
++
++
++  URL_NAME = 'survey'
++  DOCUMENT_ACCESS = ['admin', 'restricted', 'member', 'user']
++
++  #: field storing the prefix of this document
++  prefix = db.StringProperty(default='user', required=True,
++      choices=['site', 'club', 'sponsor', 'program', 'org', 'user'],
++      verbose_name=ugettext('Prefix'))
++  prefix.help_text = ugettext(
++      'Indicates the prefix of the survey,'
++      ' determines which access scheme is used.')
++
++  #: field storing the required access to read this document
++  read_access = db.StringProperty(default='public', required=True,
++      choices=DOCUMENT_ACCESS + ['public'],
++      verbose_name=ugettext('Read Access'))
++  read_access.help_text = ugettext(
++      'Indicates the state of the survey, '
++      'determines the access scheme.')
++
++  #: field storing the required access to write to this document
++  write_access = db.StringProperty(default='admin', required=True,
++      choices=DOCUMENT_ACCESS,
++      verbose_name=ugettext('Write Access'))
++  write_access.help_text = ugettext(
++      'Indicates the state of the survey, '
++      'determines the access scheme.')
++
++  #: field storing whether a link to the survey should be featured in
++  #: the sidebar menu (and possibly elsewhere); FAQs, Terms of Service,
++  #: and the like are examples of "featured" survey
++  is_featured = db.BooleanProperty(
++      verbose_name=ugettext('Is Featured'))
++  is_featured.help_text = ugettext(
++      'Field used to indicate if a Work should be featured, for example,'
++      ' in the sidebar menu.')
++
++  this_survey = db.ReferenceProperty(SurveyContent, collection_name="survey_parent")
++
++  def take_survey(self):
++  	 #return self.survey_content # temporary
++  	 from soc.views.helper.surveys import TakeSurvey
++  	 survey = TakeSurvey()
++  	 return survey.render(self.this_survey)
++
++
++
++
++
++class SurveyRecord(db.Expando):
++  """Record produced each time Survey is taken.
++  
++  Like SurveyContent, this model includes dynamic properties 
++  corresponding to the fields of the survey. 
++  """
++  this_survey = db.ReferenceProperty(Survey, collection_name="survey_records")
++  user = db.ReferenceProperty(reference_class=soc.models.user.User,
++                                required=True,
++                                collection_name="taken_surveys",
++                                verbose_name=ugettext('Created by'))   
++  created = db.DateTimeProperty(auto_now_add=True)
++  modified = db.DateTimeProperty(auto_now=True)
++  
++  def get_values(self):
++  	 values = []
++  	 for property in self.dynamic_properties(): # this could also be confined to SurveyContent
++  	    values.append( getattr(self, property) )
++  	 return values
++  	 
+diff -r 6545e6e184bb app/soc/templates/soc/models/edit.html
+--- a/app/soc/templates/soc/models/edit.html	Sun May 10 02:38:57 2009 +0200
++++ b/app/soc/templates/soc/models/edit.html	Mon May 11 11:45:29 2009 -0700
+@@ -86,4 +86,13 @@
+  </table>
+ </form>
+ </p>
++
++{% if supplemental %}
++{{ supplemental|safe }} 
++{% endif %}
++
++
+ {% endblock %}
++
++
++
+diff -r 6545e6e184bb app/soc/templates/soc/survey/list/heading.html
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/templates/soc/survey/list/heading.html	Mon May 11 11:45:29 2009 -0700
+@@ -0,0 +1,9 @@
++<tr align="left">
++  <th>Path</th>
++  <th>Title</th>
++  <th>Link ID</th>
++  <th>Featured</th>
++  <th>Created By</th>
++  <th>Created On</th>
++  <th>Modified</th>
++</tr>
+diff -r 6545e6e184bb app/soc/templates/soc/survey/list/results_heading.html
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/templates/soc/survey/list/results_heading.html	Mon May 11 11:45:29 2009 -0700
+@@ -0,0 +1,8 @@
++<tr align="left">
++{% for property in properties %}
++  <th>{{ property }}</th>
++   {% endfor %}
++  <th>Taken By</th>
++  <th>Created On</th>
++  <th>Modified</th>
++</tr>
+diff -r 6545e6e184bb app/soc/templates/soc/survey/list/results_row.html
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/templates/soc/survey/list/results_row.html	Mon May 11 11:45:29 2009 -0700
+@@ -0,0 +1,18 @@
++<tr class="off" onmouseover="this.className='on'" onmouseout="this.className='off'" 
++onclick="return false; document.location.href='{{ list.redirect }}'" name="name">
++<!--
++  <td align="right">
++   <div class="title">
++    <a class="noul"
++     href="{{ list.redirect }}">{{ list.item.scope_path}}/{{ list.item.link_id }}</a>
++   </div>
++  </td>
++  
++  -->
++  {% for value in list.item.get_values %}
++  <td><div class="{{ value }}"> {{ value }}</div></td>
++  {% endfor %}
++  <td><div class="author">{{ list.item.user.link_id }}</div></td>
++  <td><div class="created">{{ list.item.created }}</div></td>
++  <td><div class="modified">{{ list.item.modified }}</div></td>
++</tr>
+diff -r 6545e6e184bb app/soc/templates/soc/survey/list/row.html
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/templates/soc/survey/list/row.html	Mon May 11 11:45:29 2009 -0700
+@@ -0,0 +1,15 @@
++<tr class="off" onmouseover="this.className='on'" onmouseout="this.className='off'" 
++onclick="document.location.href='{{ list.redirect }}'" name="name">
++  <td align="right">
++   <div class="title">
++    <a class="noul"
++     href="{{ list.redirect }}">{{ list.item.scope_path}}/{{ list.item.link_id }}</a>
++   </div>
++  </td>
++  <td><div class="title">{{ list.item.title }}</div></td>
++  <td><div class="link_id">{{ list.item.link_id }}</div></td>
++  <td><div class="featured">{{ list.item.is_featured }}</div></td>
++  <td><div class="author">{{ list.item.author.link_id }}</div></td>
++  <td><div class="created">{{ list.item.created }}</div></td>
++  <td><div class="modified">{{ list.item.modified }}</div></td>
++</tr>
+diff -r 6545e6e184bb app/soc/templates/soc/survey/public.html
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/templates/soc/survey/public.html	Mon May 11 11:45:29 2009 -0700
+@@ -0,0 +1,42 @@
++{% extends "soc/base.html" %}
++{% comment %}
++Licensed under the Apache License, Version 2.0 (the "License");
++you may not use this file except in compliance with the License.
++You may obtain a copy of the License at
++
++  http://www.apache.org/licenses/LICENSE-2.0
++
++Unless required by applicable law or agreed to in writing, software
++distributed under the License is distributed on an "AS IS" BASIS,
++WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++See the License for the specific language governing permissions and
++limitations under the License.
++{% endcomment %}
++
++{% block page_title %}
++{{ entity.title }}
++{% endblock %}
++
++{% block header_title %}
++{{ entity.title }}
++{% endblock %}
++
++{% block body %}
++<div id="created">Last modified on {{ entity.modified }} by {{ entity.modified_by.name }}</div>
++
++
++<form method="post">
++
++{{ entity.take_survey|safe }}
++<table>
++<tbody>
++<tr> <td> 
++<input type="submit" value="Submit" style="font-weight: bold;"/>
++</td>
++</tr>
++</tbody>
++</table>
++
++</form>
++
++{% endblock %}
+diff -r 6545e6e184bb app/soc/templates/soc/survey/results.html
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/templates/soc/survey/results.html	Mon May 11 11:45:29 2009 -0700
+@@ -0,0 +1,13 @@
++{% if list_msg %}
++{{ list_msg|safe }}
++{% endif %}
++
++{% if list.empty %}
++{{ no_lists_msg }}
++{% endif %}
++{% for list_number in list.lists %}
++<p>
++
++{% include list.nextList %}
++</p>
++{% endfor %}
+diff -r 6545e6e184bb app/soc/views/helper/redirects.py
+--- a/app/soc/views/helper/redirects.py	Sun May 10 02:38:57 2009 +0200
++++ b/app/soc/views/helper/redirects.py	Mon May 11 11:45:29 2009 -0700
+@@ -345,6 +345,26 @@
+   return '/document/list/%s/%s' % (prefix, entity.key().id_or_name())
+ 
+ 
++def getCreateSurveyRedirect(entity, prefix):
++  """Returns the redirect for new documents.
++  """
++
++  return '/survey/create/%s/%s' % (prefix, entity.key().id_or_name())
++
++
++def getListSurveysRedirect(entity, prefix):
++  """Returns the redirect for listing documents.
++  """
++
++  return '/survey/list/%s/%s' % (prefix, entity.key().id_or_name())
++
++def getListSurveyResultsRedirect(entity, prefix):
++  """Returns the redirect for listing documents.
++  """
++
++  return '/survey/list_results/%s/%s' % (prefix, entity.key().id_or_name())
++  
++
+ def getToSRedirect(presence):
+   """Returns link to 'show' the ToS Document if it exists, None otherwise.
+ 
+diff -r 6545e6e184bb app/soc/views/helper/surveys.py
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/views/helper/surveys.py	Mon May 11 11:45:29 2009 -0700
+@@ -0,0 +1,224 @@
++#!/usr/bin/python2.5
++#
++# Copyright 2008 the Melange authors.
++#
++# Licensed under the Apache License, Version 2.0 (the "License");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#   http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an "AS IS" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++
++"""Custom widgets used for form fields.
++"""
++
++__authors__ = [
++  'JamesLevy" <jamesalexanderlevy@gmail.com>',
++
++  ]
++
++
++from django import forms
++from django.forms import util
++from django.forms import widgets
++from django.utils import html
++from django.utils import simplejson
++from django.utils import safestring
++from soc.models.survey import SurveyContent, Survey, SurveyRecord
++from soc.logic import dicts
++import cgi
++import wsgiref.handlers
++from google.appengine.ext import db
++from google.appengine.ext import webapp
++from google.appengine.ext.webapp import template
++
++from google.appengine.ext.db import djangoforms
++
++
++
++class SurveyForm(djangoforms.ModelForm):
++ def __init__(self, *args, **kwargs):
++    """ This class is used to produce survey forms for several 
++    circumstances:
++    
++    - Admin creating survey from scratch
++    - Admin updating existing survey
++    - User taking survey 
++    - User updating already taken survey
++    
++    Using dynamic properties of the this_survey model (if passed
++    as an arg) the survey form is dynamically formed.
++    
++    TODO: Form now scrambles the order of fields. If it's important
++    that fields are listed in a certain order, an alternative to 
++    the schema dictionary will have to be used.
++    """
++    kwargs['initial']= {}
++    this_survey = kwargs.get('this_survey', None)
++    survey_record = kwargs.get('survey_record', None)
++    del kwargs['this_survey']
++    del kwargs['survey_record']
++    if this_survey: 
++		schema = this_survey.get_schema()
++		for property in this_survey.dynamic_properties():
++		  if survey_record: # use previously entered value
++		     value = getattr(survey_record, property)
++		  else: # use prompts set by survey creator
++		     value = getattr(this_survey, property)
++		 # if schema[property] == "selection": pass
++		  if schema[property] == "long_answer": 
++		    SurveyForm.base_fields[property] = forms.fields.CharField(widget=widgets.Textarea())
++		    kwargs['initial'][property] = value
++		  if schema[property] == "short_answer": 
++		    SurveyForm.base_fields[property] = forms.fields.CharField(max_length=40)
++		    kwargs['initial'][property] = value 
++		  if schema[property] == "selection": 
++		    these_choices = []
++		    # add all properties, but select chosen one
++		    options = eval( getattr(this_survey, property) )
++		    if survey_record: 
++		       these_choices.append( (value, value) )
++		       options.remove(value) 
++		    for option in options: these_choices.append( (option, option) )
++		    SurveyForm.base_fields[property] = forms.ChoiceField( choices=tuple(these_choices), widget=forms.Select())
++
++    super(SurveyForm, self).__init__(*args, **kwargs)
++    
++ 
++ class Meta:
++  model = SurveyContent
++  exclude = ['schema']  
++
++ 
++
++    
++    
++ 
++      
++class EditSurvey(widgets.Widget):
++   """
++   Edit Survey, or Create Survey if not this_survey arg given.
++   """	
++   WIDGET_HTML = """
++   <div id="survey_widget"><table> %(survey)s </table> %(options_html)s </div>
++   <script type="text/javascript" src="/soc/content/js/edit_survey.js"></script>
++   """
++   QUESTION_TYPES = {"short_answer": "Short Answer", "long_answer": "Long Answer", "selection": "Selection" }
++   BUTTON_TEMPLATE = """
++   <button id="%(type_id)s" onClick="return false;">Add %(type_name)s Question</button>
++   """
++   OPTIONS_HTML = """
++   <div id="survey_options"> %(options)s </div>
++   """	
++   SURVEY_TEMPLATE = """
++   <tbody></tbody>
++   """	
++   def __init__(self, *args, **kwargs):
++    """Defines the name, key_name and model for this entity.
++    """
++    self.this_survey = kwargs.get('this_survey', None)
++    if self.this_survey: del kwargs['this_survey']
++
++    super(EditSurvey, self).__init__(*args, **kwargs)
++                    
++   def render(self, name, value, attrs=None):
++	#print self.entity
++	#if self.entity: survey = self.SurveyForm(entity)
++	#else: survey = self.SurveyForm()
++
++	survey = SurveyForm(this_survey=self.this_survey, survey_record=None)
++	survey = str(survey)
++	if len(survey) == 0: survey = self.SURVEY_TEMPLATE
++	options = ""
++	for type_id, type_name in self.QUESTION_TYPES.items():
++		options += self.BUTTON_TEMPLATE % { 'type_id': type_id, 'type_name': type_name }
++	options_html = self.OPTIONS_HTML % {'options': options }
++	result = self.WIDGET_HTML % {'survey': str(survey), 'options_html':options_html } 
++	return result
++    
++
++
++class TakeSurvey(widgets.Widget):
++   """
++   Take Survey, or Update Survey.  """
++   WIDGET_HTML = """
++   %(help_text)s <div class="%(status)s"id="survey_widget"><table> %(survey)s </table> </div>
++   <script type="text/javascript" src="/soc/content/js/take_survey.js"></script>
++   """
++
++   def render(self, this_survey):
++	#check if user has already submitted form. If so, show existing form 
++	import soc.models.user
++	from soc.logic.models.user import logic as user_logic
++	user = user_logic.getForCurrentAccount()
++	survey_record = SurveyRecord.gql("WHERE user = :1 AND this_survey = :2", user, this_survey.survey_parent.get()).get()
++	survey = SurveyForm(this_survey=this_survey, survey_record=survey_record) 
++	if survey_record: 
++	   help_text = "Edit and re-submit this survey."
++	   status = "edit"
++	else: 
++	   help_text = "Please complete this survey."
++	   status = "create"
++	  
++	result = self.WIDGET_HTML % {'survey': str(survey), 'help_text': help_text, 
++	                             'status': status } 
++	return result
++    
++
++
++
++class SurveyResults(widgets.Widget):
++	"""
++	
++	Render List of Survey Results For Given Survey
++	
++	"""
++	def render(self, this_survey, params, filter=filter, limit=1000, 
++	           offset=0, order=[], idx=0, context={}):
++		from soc.logic.models.survey import results_logic as results_logic
++		logic = results_logic
++		filter = { 'this_survey': this_survey }
++		data = logic.getForFields(filter=filter, limit=limit, offset=offset,
++							order=order)
++
++		params['name'] = "Survey Results"
++		content = {
++		  'idx': idx,
++		  'data': data,
++		  #'export': export_link, TODO - export to CVS
++		  'logic': logic,
++		  'limit': limit,
++		  }
++		updates = dicts.rename(params, params['list_params'])
++		content.update(updates)
++		contents = [content]
++		#content = [i for i in contents if i.get('idx') == export]
++		if len(content) == 1:
++		  content = content[0]
++		  key_order = content.get('key_order')
++
++		  #if key_order: TODO - list order 
++			#data = [i.toDict(key_order) for i in content['data']]
++			#filename = "export_%d" % export
++			#return self.csv(request, data, filename, params, key_order)
++
++		from soc.views import helper
++		import soc.logic.lists
++		context['list'] = soc.logic.lists.Lists(contents)
++		for list in context['list']._contents:
++			list['row'] = 'soc/survey/list/results_row.html'
++			list['heading'] = 'soc/survey/list/results_heading.html'
++			list['description'] = 'Survey Results:'
++		context['properties'] = this_survey.this_survey.dynamic_properties()
++		context['entity_type'] = "Survey Results"
++		context['entity_type_plural'] = "Results"
++		context['no_lists_msg'] = "No Survey Results"
++
++		from django.template import loader
++		markup = loader.render_to_string('soc/survey/results.html', dictionary=context).strip('\n')
++		return markup
+diff -r 6545e6e184bb app/soc/views/models/program.py
+--- a/app/soc/views/models/program.py	Sun May 10 02:38:57 2009 +0200
++++ b/app/soc/views/models/program.py	Mon May 11 11:45:29 2009 -0700
+@@ -52,6 +52,7 @@
+ from soc.views.models import presence
+ from soc.views.models import document as document_view
+ from soc.views.models import sponsor as sponsor_view
++from soc.views.models import survey as survey_view
+ from soc.views.sitemap import sidebar
+ 
+ import soc.cache.logic
+@@ -645,6 +646,7 @@
+       if entity.status == 'visible':
+         # show the documents for this program, even for not logged in users
+         items += document_view.view.getMenusForScope(entity, params)
++        items += survey_view.view.getMenusForScope(entity, params)
+         items += self._getTimeDependentEntries(entity, params, id, user)
+ 
+       try:
+@@ -677,8 +679,10 @@
+         items += [(redirects.getCreateDocumentRedirect(entity, 'program'),
+             "Create a New Document", 'any_access')]
+         # add link to list all Program Document
+-        items += [(redirects.getListDocumentsRedirect(entity, 'program'),
+-            "List Documents", 'any_access')]
++        items += [(redirects.getCreateSurveyRedirect(entity, 'program'),
++            "Create a New Survey", 'any_access')]
++        items += [(redirects.getListSurveysRedirect(entity, 'program'),
++            "List Surveys", 'any_access')]
+ 
+       except out_of_band.Error:
+         pass
+diff -r 6545e6e184bb app/soc/views/models/survey.py
+--- /dev/null	Thu Jan 01 00:00:00 1970 +0000
++++ b/app/soc/views/models/survey.py	Mon May 11 11:45:29 2009 -0700
+@@ -0,0 +1,260 @@
++#!/usr/bin/python2.5
++#
++# Copyright 2008 the Melange authors.
++#
++# Licensed under the Apache License, Version 2.0 (the "License");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#   http://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an "AS IS" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++
++"""Views for Surveys.
++"""
++
++__authors__ = [
++  'JamesLevy" <jamesalexanderlevy@gmail.com>',
++  ]
++
++
++from django import forms
++
++from soc.logic import cleaning
++from soc.logic import dicts
++from soc.logic.models.survey import logic as survey_logic
++from soc.logic.models.user import logic as user_logic
++from soc.views.helper import access
++from soc.views.helper import decorators
++from soc.views.helper import redirects
++from soc.views.helper import widgets, surveys
++from soc.views.models import base
++
++
++class View(base.View):
++  """View methods for the Survey model.
++  """
++
++  def __init__(self, params=None):
++    """Defines the fields and methods required for the base View class
++    to provide the user with list, public, create, edit and delete views.
++
++    Params:
++      params: a dict with params for this View
++    """
++
++    # Param for entity?
++    rights = access.Checker(params)
++    rights['any_access'] = ['allow']
++    rights['show'] = ['checkIsDocumentReadable']
++    rights['create'] = ['checkIsUser']
++    rights['edit'] = ['checkIsDocumentWritable']
++    rights['delete'] = ['checkIsDocumentWritable']
++    rights['list'] = ['checkDocumentList']
++    rights['pick'] = ['checkDocumentPick']
++
++    new_params = {}
++    new_params['logic'] = survey_logic
++    new_params['rights'] = rights
++
++    new_params['name'] = "Survey"
++    new_params['pickable'] = True
++
++    new_params['export_content_type'] = 'text/text'
++    new_params['export_extension'] = '.html'
++    new_params['export_function'] = lambda x: (x.content, x.link_id)
++    new_params['delete_redirect'] = '/'
++    new_params['list_key_order'] = [
++        'link_id', 'scope_path', 'name', 'short_name', 'title',
++        'content', 'prefix','read_access','write_access']
++
++    new_params['no_create_raw'] = True
++    new_params['no_create_with_scope'] = True
++    new_params['no_create_with_key_fields'] = True
++    new_params['no_list_raw'] = True
++    new_params['sans_link_id_create'] = True
++    new_params['sans_link_id_list'] = True
++
++    new_params['create_dynafields'] = [
++        {'name': 'link_id',
++         'base': forms.fields.CharField,
++         'label': 'Survey Link ID',
++         },
++        ]
++
++    new_params['create_extra_dynaproperties'] = {
++
++
++        'survey_content': forms.fields.CharField(widget=surveys.EditSurvey(),
++                                             required=False),
++        'scope_path': forms.fields.CharField(widget=forms.HiddenInput,
++                                             required=True),
++        'prefix': forms.fields.CharField(widget=widgets.ReadOnlyInput(),
++                                        required=True),
++        'clean_content': cleaning.clean_html_content('content'),
++        'clean_link_id': cleaning.clean_link_id('link_id'),
++        'clean_scope_path': cleaning.clean_scope_path('scope_path'),
++        'clean': cleaning.validate_document_acl(self, True),
++        }
++    new_params['extra_dynaexclude'] = ['author', 'created', 'content', 'home_for',
++                                       'modified_by', 'modified', 'take_survey', 'this_survey' ]
++
++    new_params['edit_extra_dynaproperties'] = {
++                                            
++        'doc_key_name': forms.fields.CharField(widget=forms.HiddenInput),
++        'created_by': forms.fields.CharField(
++            widget=widgets.ReadOnlyInput(), required=False),
++        'last_modified_by': forms.fields.CharField(
++            widget=widgets.ReadOnlyInput(), required=False),
++        'clean': cleaning.validate_document_acl(self),
++        }
++
++    params = dicts.merge(params, new_params)
++
++    super(View, self).__init__(params=params)
++
++  def list(self, request, access_type,
++           page_name=None, params=None, filter=None, order=None, **kwargs):
++    """See base.View.list.
++    """
++
++    return super(View, self).list(request, access_type, page_name=page_name,
++                                  params=params, filter=kwargs)
++
++                                      
++  def _public(self, request, entity, context):
++    """Performs any required processing to get an entity's public page.
++
++    Should return True if the public page should be displayed.
++
++    Args:
++      request: the django request object
++      entity: the entity to make public
++      context: the context object
++    """
++
++    if len(request.POST) == 0: return True
++    user = user_logic.getForCurrentAccount()
++    this_survey = survey_logic.create_survey_record(user, entity, request.POST)
++    return True
++
++  def _editContext(self, request, context):
++    """Performs any required processing on the context for edit pages.
++
++    Args:
++      request: the django request object
++      context: the context dictionary that will be used
++      
++      Adds list of SurveyRecord results as supplement to view.
++      
++      See surveys.SurveyResults for details.
++      
++    """
++
++    if not getattr(self, '_entity', None): return
++    results = surveys.SurveyResults()
++
++    context['supplemental'] = results.render(self._entity, self._params, filter={})
++    super(View, self)._editContext(request, context)
++
++  def _editPost(self, request, entity, fields):
++    """See base.View._editPost().
++    
++    Processes POST request items to add new dynamic field names, 
++    question types, and default prompt values to SurveyContent model.
++    """
++
++
++    user = user_logic.getForCurrentAccount()
++
++    if not entity:
++      fields['author'] = user
++    else:
++		fields['author'] = entity.author
++		
++		""" Check for new fields  
++		"""
++    survey_fields = {}
++    schema = {}
++    PROPERTY_TYPES = ('long_answer','short_answer','selection')
++    for key, value in request.POST.items():
++		if 'survey_' in key:
++			field_name = key.replace('survey_', '')
++			for type in PROPERTY_TYPES:
++				if type + "__" in field_name: 
++				   field_name = field_name.replace(type + "__", "")
++				   schema[field_name] = type
++				   if type == "selection":
++				   	value = str(  value.split(',')  )
++			survey_fields[field_name] = value
++
++    this_survey = survey_logic.create_survey(survey_fields, schema, this_survey=getattr(entity,'this_survey', None) )
++    if entity: entity.this_survey = this_survey 
++    else: fields['this_survey'] = this_survey
++    
++    fields['modified_by'] = user
++    from soc.cache import home
++    # Flush the cache! TODO - Not Working
++    if entity: home.flush(entity)
++
++    super(View, self)._editPost(request, entity, fields)
++
++  def _editGet(self, request, entity, form):
++    """See base.View._editGet().
++    """
++    
++    self._entity = entity
++    form.fields['survey_content'] = forms.fields.CharField(widget=surveys.EditSurvey(this_survey=entity.this_survey), 
++                                     required=False)
++    form.fields['created_by'].initial = entity.author.name
++    form.fields['last_modified_by'].initial = entity.modified_by.name
++    form.fields['doc_key_name'].initial = entity.key().id_or_name()
++
++    super(View, self)._editGet(request, entity, form)
++
++  def getMenusForScope(self, entity, params):
++    """Returns the featured menu items for one specifc entity.
++
++    A link to the home page of the specified entity is also included.
++
++    Args:
++      entity: the entity for which the entry should be constructed
++      params: a dict with params for this View.
++    """
++
++
++    filter = {
++        'prefix' : params['url_name'],
++        'scope_path': entity.key().id_or_name(),
++        'is_featured': True,
++        }
++
++
++    entities = self._logic.getForFields(filter)
++
++    submenus = []
++
++    # add a link to all featured documents
++    for entity in entities:
++      #TODO only if a document is readable it might be added
++      submenu = (redirects.getPublicRedirect(entity, self._params),
++                 entity.short_name, 'show')
++      submenus.append(submenu)
++
++    return submenus
++
++
++view = View()
++
++admin = decorators.view(view.admin)
++create = decorators.view(view.create)
++edit = decorators.view(view.edit)
++delete = decorators.view(view.delete)
++list = decorators.view(view.list)
++public = decorators.view(view.public)
++export = decorators.view(view.export)
++pick = decorators.view(view.pick)
+diff -r 6545e6e184bb app/soc/views/sitemap/build.py
+--- a/app/soc/views/sitemap/build.py	Sun May 10 02:38:57 2009 +0200
++++ b/app/soc/views/sitemap/build.py	Mon May 11 11:45:29 2009 -0700
+@@ -45,6 +45,7 @@
+ from soc.views.models import student
+ from soc.views.models import student_project
+ from soc.views.models import student_proposal
++from soc.views.models import survey
+ from soc.views.models import timeline
+ from soc.views.models import user
+ from soc.views.models import user_self
+@@ -101,6 +102,7 @@
+ sitemap.addPages(student.view.getDjangoURLPatterns())
+ sitemap.addPages(student_project.view.getDjangoURLPatterns())
+ sitemap.addPages(student_proposal.view.getDjangoURLPatterns())
++sitemap.addPages(survey.view.getDjangoURLPatterns())
+ sitemap.addPages(timeline.view.getDjangoURLPatterns())
+ sitemap.addPages(user_self.view.getDjangoURLPatterns())
+ sitemap.addPages(user.view.getDjangoURLPatterns())

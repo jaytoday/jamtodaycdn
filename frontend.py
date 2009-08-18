@@ -38,6 +38,7 @@ def get_image(image_id, property):
   image = db.get(image_id)
   return eval("image.%s" % property)
   
+  
 class ImageServer(GenericServer):
     "Serve the main image"
     property = 'image'

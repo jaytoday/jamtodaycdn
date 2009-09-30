@@ -4,6 +4,9 @@ runtime: python
 api_version: 1
 
 handlers:
+
+# Resources
+
 - url: /assets
   static_dir: assets
   
@@ -12,7 +15,38 @@ handlers:
     
 - url: /i/(img|thumb).*
   script: frontend.py
+  
+  
+# Paste Bin
+
+- url: /paste/style.css
+  static_files: paste_app/css/style.css
+  upload: paste_app/css/style.css
+
+- url: /google7a57039305de2730.html
+  static_files: paste_app/css/style.css/static/google7a57039305de2730.html
+  upload: paste_app/css/style.css/static/google7a57039305de2730.html
+
+- url: /LiveSearchSiteAuth.xml
+  static_files: paste_app/css/style.css/static/LiveSearchSiteAuth.xml
+  upload: paste_app/css/style.css/static/LiveSearchSiteAuth.xml
+
+- url: /y_key_f04f979d5652fb0d.html
+  static_files: paste_app/css/style.css/static/y_key_f04f979d5652fb0d.html
+  upload: paste_app/css/style.css/static/y_key_f04f979d5652fb0d.html
+
+- url: /images
+  static_dir: paste_app/css/style.css/images
+
+- url: /past.*
+  script: paste_app/main.py
+    
+
+# Front-End
 
 - url: /.*
   script: backend.py
   login: admin
+  
+- url: .*
+  script: main.py

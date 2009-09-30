@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 26
+/svn/!svn/ver/67/trunk/src
+END
+app.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 35
+/svn/!svn/ver/52/trunk/src/app.yaml
+END
+smoid.py
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/4/trunk/src/smoid.py
+END
+index.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/svn/!svn/ver/66/trunk/src/index.yaml
+END
+main.py
+K 25
+svn:wc:ra_dav:version-url
+V 34
+/svn/!svn/ver/38/trunk/src/main.py
+END

@@ -16,7 +16,15 @@ pre {
 }
 
 code span.comment {
-  color: #DDD;
+  color: DarkOrchid;
+}
+
+code span.multiline {
+  color: LightGreen;
+}
+
+code span.multiline_singlequote {
+  color: LightCoral;
 }
 
 code span.string {
@@ -26,16 +34,20 @@ code span.string {
 code span.brackets {
 }
 
+code span.decorator {
+  color: Gold;
+}
+
 code span.symbol {
   color: #6BCFF7;
 }
 
-code span.keywords {
-  color: #FF8400;
+code span.reserved {
+  color: Peru;
 }
 
-code span.erb {
-  background: #333;
+code span.builtin {
+  color: SteelBlue;
 }
 
 code span.symbol {
@@ -43,41 +55,9 @@ code span.symbol {
 }
 
 code span.operators {
-  color: #FBDE2D;
+  color: #888;
 }
 
 code span.constants {
   color: #BD48B3;
-}
-
-
-/* Lyrics */
-/* TODO: Move out */
-
-div.lyrics {
-  height: 7em;
-  overflow: auto;
-  text-align: center;
-  color: #666;
-  font-family: italic;
-}
-
-/* More piggybacking */
-
-body {
-}
-
-h1 #the-pug-instamatic {
-  position: absolute;
-  bottom: -1px;
-  left: -20px;
-}
-
-/* Center images */
-div.photo img {
-  display: block;
-  margin: 0 auto;
-}
-div.photo br {
-  display: none;
 }

@@ -1,0 +1,30 @@
+
+
+{% extends "interface.html" %}
+
+{% block body %}
+    {% if ratelimit %}
+        <div class="notice">
+            <strong>Notice:</strong> To keep the site available to all, a limit is in place of {{ratelimit}} statements per minute.  Thank you.
+        </div>
+    {% endif %}
+    <div id="console_interface">
+        <form id="console_form" action="/console/statement">
+            <div class="issue-list">
+                <div id="console_area">
+                    <div id="console_output"></div>
+                </div>
+            </div>
+
+            <div id="inputArea">
+                <div id="prompt"></div>
+                <div id="oneline" class="promptBox">
+                    <input id="console_statement" name="input_text" type="text" class="textbox">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="talkinator"></div>
+    <div id="pastebin"></div>
+{% endblock %}

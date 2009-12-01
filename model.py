@@ -5,6 +5,7 @@ class Image(db.Model):
     "Represents an image stored in the datastore"
     # blog properties storing up to 1MB of binary data
     image = db.BlobProperty()
+    title = db.StringProperty()
     thumb = db.BlobProperty()
     original = db.BlobProperty()
     # store the date just in case

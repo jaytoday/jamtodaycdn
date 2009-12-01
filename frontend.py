@@ -10,7 +10,7 @@ from google.appengine.ext import db
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 
-from models import Image
+from model import Image
 from memoize import memoize
 
 class GenericServer(webapp.RequestHandler):
@@ -34,7 +34,7 @@ class GenericServer(webapp.RequestHandler):
             self.error(404)
 
 @memoize()
-def get_image(image_id, property):
+def get_image(image_id, property, **kwargs):
   image = db.get(image_id)
   return eval("image.%s" % property)
   

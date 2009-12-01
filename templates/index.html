@@ -21,13 +21,18 @@
 
         <div id="content">
             <form action="/upload" enctype="multipart/form-data" method="post">
-                <label for="img">Image</label>
+                <div>
+                Image
                 <input type="file" name="img" id="img"/>
-                <label for="width">Width</label>
-                <input type="text" name="width" id="width" class="txt"/>
-                <label for="height">Height</label>
-                <input type="text" name="height" id="height" class="txt"/>
-                <input type="submit" value="Upload"/>
+                </div>
+                <div style="height:10px;"></div>
+                                <div>
+                Title
+                <input type="text" name="title" id="title"/>
+                </div>
+<br/>
+                <div><input type="submit" value="Upload"/>
+                </div>
             </form>
             
             <p>Not specifying a width or height will result in the original image being stored unaltered in dimension. All images are converted to pngs. Maximum 1MB.</p>
@@ -36,18 +41,32 @@
             <ul id="images">
             {% for image in images %}
                 <li>
-                    <a href="/i/img?id={{image.key}}" class="lightbox"><img src="/i/thumb?id={{image.key}}"/></a>
+                    <a href="/i/img?id={{image.key}}" class="lightbox">
+                    <img src="/i/thumb?id={{image.key}}"/>
+                    </a>
+                    <div class="title">{{ image.title }}</div>
                     <form action="/delete" method="post">
                         <input type="hidden" value="{{image.key}}" name="key"/>
                         <input type="submit" value="Delete" name="delete"/>
+                    </form>
+                    
+                    <form action="/upload" enctype="multipart/form-data" method="post">
+                        <input type="hidden" value="{{image.key}}" name="key"/>
+                        <div style="margin-top:5px;">
+                        <input type="file" name="img" id="img"/>
+                        </div>
+                        
+                        <div style="margin-top:5px;">
+                        <input type="submit" value="Update" name="update"/>
+                        </div>
+                        
                     </form>
                 </li>
             {% endfor %}
             </ul> <!-- end images -->
             {% endif %}
             
-            <p>This application was originally build by Gareth Rushgroge to host and quickly resize images for his blog <a href="http://morethanseven.net">morethanseven.net</a>. The code can be found on <a href="http://github.com/garethr/appengine-image-host">GitHub</a>.</p>
-        
+
         </div> <!-- end content -->
     </body>
 </html>

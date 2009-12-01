@@ -12,7 +12,7 @@ from google.appengine.api import images
 from google.appengine.ext.webapp import template
 from google.appengine.api import users
 
-from models import Image
+from model import Image
 
 class Index(webapp.RequestHandler):
     """
@@ -44,6 +44,8 @@ class Index(webapp.RequestHandler):
         # render the template with the provided context
         self.response.out.write(template.render(path, context))
 
+        
+        
 class Deleter(webapp.RequestHandler):
     "Deals with deleting images"
     def post(self):
@@ -62,36 +64,32 @@ class Uploader(webapp.RequestHandler):
     def post(self):
         "Upload via a multitype POST message"
         
-        try:
-            # check we have numerical width and height values
-            width = int(self.request.get("width"))
-            height = int(self.request.get("height"))
-        except ValueError:
-            # if we don't have valid width and height values
-            # then just use the original image
-            image_content = self.request.get("img")
-        else:
-            # if we have valid width and height values
-            # then resize according to those values
-            image_content = images.resize(self.request.get("img"), width, height)
-        
-        # get the image data from the form
-        original_content = self.request.get("img")
+        image_content = self.request.get("img")
+
         # always generate a thumbnail for use on the admin page
         thumb_content = images.resize(self.request.get("img"), 100, 100)
         
+        if self.request.get('key'):
+          image = db.get(self.request.get("key"))
         # create the image object
-        image = Image()
-        # and set the properties to the relevant values
+        else: 
+          image = Image()
+          image.user = users.get_current_user()
+          image.title = self.request.get('title')
+
         image.image = db.Blob(image_content)
         # we always store the original here in case of errors
         # although it's currently not exposed via the frontend
-        image.original = db.Blob(original_content)
         image.thumb = db.Blob(thumb_content)
-        image.user = users.get_current_user()
-                
+     
         # store the image in the datasore
         image.put()
+        
+        # refresh cache
+        from frontend import get_image
+        for property in ['image', 'thumb']:
+          get_image(str(image.key()), property, force_run=True)
+
         # and redirect back to the admin page
         self.redirect('/')
                 

@@ -47,3 +47,14 @@ ul.thumb li img.hover {
 #about_post center.badges { float:left;
 margin:0 20px 10px;}
 #about_post center.badges div { float: left; margin: 0px 25px; }
+
+
+#about_post #blog_posts li a { 
+padding:4px 8px;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+}
+
+#about_post #blog_posts li a:hover{ 
+background: #ddd;
+}

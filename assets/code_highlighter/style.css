@@ -3,7 +3,7 @@
 
 /** RUBY / JAVASCRIPT **/
 
-pre {
+pre.code {
   background: #141414;
   color: #FFF;
   padding: 1.5em;
@@ -15,49 +15,49 @@ pre {
   overflow-x: auto;
 }
 
-code span.comment {
+code.code span.comment {
   color: DarkOrchid;
 }
 
-code span.multiline {
+code.code span.multiline {
   color: LightGreen;
 }
 
-code span.multiline_singlequote {
+code.code span.multiline_singlequote {
   color: LightCoral;
 }
 
-code span.string {
+code.code span.string {
   color: #61CE3C;
 }
 
-code span.brackets {
+code.code span.brackets {
 }
 
-code span.decorator {
+code.code span.decorator {
   color: Gold;
 }
 
-code span.symbol {
+code.code span.symbol {
   color: #6BCFF7;
 }
 
-code span.reserved {
+code.code span.reserved {
   color: Peru;
 }
 
-code span.builtin {
+code.code span.builtin {
   color: SteelBlue;
 }
 
-code span.symbol {
+code.code span.symbol {
   color: #07DFFC;
 }
 
-code span.operators {
+code.code span.operators {
   color: #888;
 }
 
-code span.constants {
+code.code span.constants {
   color: #BD48B3;
 }

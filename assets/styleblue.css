@@ -442,7 +442,7 @@ text-align: center;
 
 .post p a{
 	color: #005B8B;
-	text-decoration: none;
+	text-decoration: underline;
 	font-style: bold;
 }
 
